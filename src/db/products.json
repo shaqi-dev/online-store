@@ -4,59 +4,59 @@
 		"category": "smartphone",
 		"brand": "Apple",
 		"color": "Midnight",
-		"title": "Smartphone Apple iPhone 13 128GB (Midnight)",
+		"title": "Apple iPhone 13 128GB (Midnight)",
 		"price": 799,
 		"capacity": 128,
-    "img": "../assets/images/products/apple-iphone-13-midnight.png"
+    "img": "./assets/images/products/apple-iphone-13-midnight.jpeg"
 	},
 	{
 		"id": 2,
 		"category": "smartphone",
 		"brand": "Apple",
 		"color": "Midnight",
-		"title": "Smartphone Apple iPhone 13 256GB (Midnight)",
+		"title": "Apple iPhone 13 256GB (Midnight)",
 		"price": 899,
 		"capacity": 256,
-    "img": "../assets/images/products/apple-iphone-13-midnight.png"
+    "img": "./assets/images/products/apple-iphone-13-midnight.jpeg"
 	},
 	{
 		"id": 3,
 		"category": "smartphone",
 		"brand": "Apple",
 		"color": "Midnight",
-		"title": "Smartphone Apple iPhone 13 256GB (Midnight)",
+		"title": "Apple iPhone 13 256GB (Midnight)",
 		"price": 1099,
 		"capacity": 512,
-    "img": "../assets/images/products/apple-iphone-13-midnight.png"
+    "img": "./assets/images/products/apple-iphone-13-midnight.jpeg"
 	},
 	{
 		"id": 4,
 		"category": "smartphone",
 		"brand": "Apple",
 		"color": "Green",
-		"title": "Smartphone Apple iPhone 13 128GB (Green)",
+		"title": "Apple iPhone 13 128GB (Green)",
 		"price": 799,
 		"capacity": 128,
-    "img": "../assets/images/products/apple-iphone-13-green.png"
+    "img": "./assets/images/products/apple-iphone-13-green.jpeg"
 	},
 	{
 		"id": 5,
 		"category": "smartphone",
 		"brand": "Apple",
 		"color": "Green",
-		"title": "Smartphone Apple iPhone 13 256GB (Green)",
+		"title": "Apple iPhone 13 256GB (Green)",
 		"price": 899,
 		"capacity": 256,
-    "img": "../assets/images/products/apple-iphone-13-green.png"
+    "img": "./assets/images/products/apple-iphone-13-green.jpeg"
 	},
 	{
 		"id": 6,
 		"category": "smartphone",
 		"brand": "Apple",
 		"color": "Green",
-		"title": "Smartphone Apple iPhone 13 256GB (Green)",
+		"title": "Apple iPhone 13 256GB (Green)",
 		"price": 1099,
 		"capacity": 512,
-    "img": "../assets/images/products/apple-iphone-13-green.png"
+    "img": "./assets/images/products/apple-iphone-13-green.jpeg"
 	}
 ]
