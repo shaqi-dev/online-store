@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/rolling-scopes-school/shaqi-dev-JSFE2022Q1#readme",
   "dependencies": {
+    "axios": "^0.27.2",
     "eslint-config-airbnb-typescript": "^17.0.0",
     "normalize.css": "^8.0.1"
   },
