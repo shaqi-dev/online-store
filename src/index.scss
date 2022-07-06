@@ -6,12 +6,27 @@ body {
   align-items: center;
 }
 
-.container {
-  max-width: 1200px;
+.main {
+  flex-grow: 1;
+}
+
+.main .container {
+  max-width: 1280px;
+}
+
+.link-button {
+  background: none;
+  border: none;
+  color: $color-accent-primary;
+  font-weight: bold;
+  cursor: pointer;
+  &:hover {
+    color: $color-accent-hover;
+  }
 }
 
 .footer .container {
-  width: 1200px;
+  width: 1280px;
   display: flex;
   justify-content: center;
   gap: 20px;
@@ -27,7 +42,7 @@ body {
     text-decoration: none;
     color: $color-text-primary;
     &:hover {
-      color: $color-text-hover;
+      color: $color-accent-primary;
     }
   } 
 }  

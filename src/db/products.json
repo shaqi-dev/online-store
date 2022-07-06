@@ -1,0 +1,62 @@
+[
+	{
+		"id": 1,
+		"category": "smartphone",
+		"brand": "Apple",
+		"color": "Midnight",
+		"title": "Smartphone Apple iPhone 13 128GB (Midnight)",
+		"price": 799,
+		"capacity": 128,
+    "img": "../assets/images/products/apple-iphone-13-midnight.png"
+	},
+	{
+		"id": 2,
+		"category": "smartphone",
+		"brand": "Apple",
+		"color": "Midnight",
+		"title": "Smartphone Apple iPhone 13 256GB (Midnight)",
+		"price": 899,
+		"capacity": 256,
+    "img": "../assets/images/products/apple-iphone-13-midnight.png"
+	},
+	{
+		"id": 3,
+		"category": "smartphone",
+		"brand": "Apple",
+		"color": "Midnight",
+		"title": "Smartphone Apple iPhone 13 256GB (Midnight)",
+		"price": 1099,
+		"capacity": 512,
+    "img": "../assets/images/products/apple-iphone-13-midnight.png"
+	},
+	{
+		"id": 4,
+		"category": "smartphone",
+		"brand": "Apple",
+		"color": "Green",
+		"title": "Smartphone Apple iPhone 13 128GB (Green)",
+		"price": 799,
+		"capacity": 128,
+    "img": "../assets/images/products/apple-iphone-13-green.png"
+	},
+	{
+		"id": 5,
+		"category": "smartphone",
+		"brand": "Apple",
+		"color": "Green",
+		"title": "Smartphone Apple iPhone 13 256GB (Green)",
+		"price": 899,
+		"capacity": 256,
+    "img": "../assets/images/products/apple-iphone-13-green.png"
+	},
+	{
+		"id": 6,
+		"category": "smartphone",
+		"brand": "Apple",
+		"color": "Green",
+		"title": "Smartphone Apple iPhone 13 256GB (Green)",
+		"price": 1099,
+		"capacity": 512,
+    "img": "../assets/images/products/apple-iphone-13-green.png"
+	}
+]
