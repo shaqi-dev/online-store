@@ -1,0 +1,15 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  min-height: 100vh;
+  font-family: $font-roboto;
+  font-size: 1.8rem;
+  color: $color-text-primary;
+  background-color: $color-bg-primary;
+}
