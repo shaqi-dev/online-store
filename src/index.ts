@@ -1,4 +1,5 @@
+import ProductsList from './components/product-list';
 import './scss/style.scss';
 import './index.scss';
-import './product-list.scss';
-import './product.scss';
+
+const productsList = new ProductsList();
