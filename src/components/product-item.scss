@@ -1,3 +1,5 @@
+@use '../scss/variables' as *;
+
 .product {
   width: 290px;
   padding: 25px 20px;
@@ -31,6 +33,15 @@
   }
 }
 
+.product--not-in-stock {
+  img {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+  }
+
+  color: $color-text-disabled;
+}
+
 .product__title {
   margin: 0px;
   font-size: 1.6rem;
@@ -38,6 +49,7 @@
 }
 
 .product__body {
+  flex-grow: 1;
   display: flex;
   gap: 5px;
   flex-direction: column;

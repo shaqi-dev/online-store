@@ -23,6 +23,9 @@ body {
   &:hover {
     color: $color-accent-hover;
   }
+  &:disabled {
+    color: $color-text-disabled;
+  }
 }
 
 .footer .container {

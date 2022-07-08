@@ -6,7 +6,8 @@ export interface Product {
   color: string,
   model: string,
   price: number,
-  capacity: number,
+  capacity?: number,
+  size?: string,
   img: string
   inStockCount: number,
 }

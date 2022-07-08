@@ -19,15 +19,21 @@ export default class ProjectItem
     const release = this.element.querySelector('.product__release') as HTMLSpanElement;
     const inStock = this.element.querySelector('.product__in-stock') as HTMLSpanElement;
     const priceEl = this.element.querySelector('.product__price') as HTMLSpanElement;
+    const addToCartBtn = this.element.querySelector('.link-button--add-to-cart') as HTMLButtonElement;
 
     const {
-      brand, model, capacity, color, img, releaseDate, inStockCount, price,
+      brand, model, capacity, size, color, img, releaseDate, inStockCount, price,
     } = this.product;
 
     image.src = img;
-    title.innerText = `${brand} ${model} ${capacity}GB (${color})`;
+    title.innerText = `${brand} ${model} ${capacity ? `${capacity}GB ` : ''}${size ? `${size} ` : ''}(${color})`;
     release.innerText = `Release: ${releaseDate}`;
-    inStock.innerText = `In stock: ${inStockCount} pcs.`;
+    inStock.innerText = `${inStockCount > 0 ? `In stock: ${inStockCount} pcs.` : 'Not in stock'}`;
     priceEl.innerText = `$${price}`;
+
+    if (inStockCount === 0) {
+      this.element.classList.add('product--not-in-stock');
+      addToCartBtn.disabled = true;
+    }
   }
 }
