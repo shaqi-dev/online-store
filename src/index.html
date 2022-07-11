@@ -10,9 +10,14 @@
 		<header class="header">
 			<div class="container">
 				<h1>Online-Store</h1>
-				<nav class="nav">
-				</nav>
-				<div class="cart"></div>
+				<nav class="nav"></nav>
+				<div class="cart">
+					<img
+						src="./assets/svg/shopping-bag-icon.svg"
+						alt="Shopping bag"
+						class="shopping-bag"
+					/>
+				</div>
 			</div>
 		</header>
 		<main class="main">
@@ -42,24 +47,21 @@
 		</footer>
 
 		<template id="category-list">
-			<ul class="categories">
-			</ul>
+			<ul class="categories"></ul>
 		</template>
 
 		<template id="category-item">
-			<li class="categories__item">
-			</li>
+			<li class="categories__item"></li>
 		</template>
 
 		<template id="product-list">
-			<section class="products">
-			</section>
+			<section class="products"></section>
 		</template>
 
 		<template id="product-item">
 			<div class="product">
 				<div class="product__img">
-					<img src="" alt="Product">
+					<img src="" alt="Product" />
 				</div>
 				<h3 class="product__title"></h3>
 				<div class="product__body">
@@ -68,7 +70,9 @@
 				</div>
 				<div class="product__footer">
 					<span class="product__price"></span>
-					<button type="button" class="link-button link-button--add-to-cart">Add to cart</button>
+					<button type="button" class="link-button link-button--add-to-cart">
+						Add to cart
+					</button>
 				</div>
 			</div>
 		</template>
