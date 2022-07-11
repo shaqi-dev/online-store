@@ -26,5 +26,6 @@ module.exports = {
   rules: {
     '@typescript-eslint/no-explicit-any': 'error',
     '@typescript-eslint/no-var-requires': 'off',
+    'no-underscore-dangle': 'off',
   },
 };

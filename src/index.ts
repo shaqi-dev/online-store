@@ -1,10 +1,13 @@
 import ProductsList from './components/product-list';
 import ProductFilters from './components/product-filters';
+import ProductCart from './components/product-cart';
 import './scss/style.scss';
 import './index.scss';
 
 const productsList = new ProductsList();
 const productFilters = new ProductFilters();
+const productCart = new ProductCart();
+
 const categories = document.querySelectorAll('.categories__item') as NodeListOf<HTMLLIElement>;
 
 const setActiveCategory = (nextActive: HTMLLIElement) => {
@@ -13,8 +16,11 @@ const setActiveCategory = (nextActive: HTMLLIElement) => {
     currentActive.classList.remove('categories__item--active');
     nextActive.classList.add('categories__item--active');
 
-    productFilters.category = nextActive.innerText.toLowerCase();
-    productsList.useFilters(productFilters.filters);
+    productFilters.state = {
+      ...productFilters.state,
+      category: nextActive.innerText.toLowerCase(),
+    };
+    productsList.useFilters(productFilters.state);
   }
 };
 
