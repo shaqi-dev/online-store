@@ -7,10 +7,19 @@
 		<title>Online-Store</title>
 	</head>
 	<body>
-		<header class="header"></header>
+		<header class="header">
+			<div class="container">
+				<h1>Online-Store</h1>
+				<nav class="nav">
+				</nav>
+				<div class="cart"></div>
+			</div>
+		</header>
 		<main class="main">
 			<div class="container">
-				<aside class="product-filters"></aside>
+				<aside class="product-filters">
+					<div class="filter"></div>
+				</aside>
 			</div>
 		</main>
 		<footer class="footer">
@@ -31,6 +40,16 @@
 				</p>
 			</div>
 		</footer>
+
+		<template id="category-list">
+			<ul class="categories">
+			</ul>
+		</template>
+
+		<template id="category-item">
+			<li class="categories__item">
+			</li>
+		</template>
 
 		<template id="product-list">
 			<section class="products">

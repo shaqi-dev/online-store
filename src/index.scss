@@ -2,8 +2,24 @@
 
 body {
   display: flex;
+  gap: 80px;
   flex-direction: column;
   align-items: center;
+}
+
+.header {
+  width: 100%;
+  background: white;
+  padding: 20px 0;
+}
+
+.header .container {
+  width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
 }
 
 .main {
@@ -11,7 +27,26 @@ body {
 }
 
 .main .container {
+  display: flex;
   max-width: 1280px;
+  gap: 40px;
+}
+
+.product-filters {
+  display: flex;
+  width: 290px;
+  height: 1000px;
+  padding: 25px 20px;
+  background: white;
+  border-radius: 20px;
+  -webkit-box-shadow: 0px 5px 15px -10px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0px 5px 15px -10px rgba(34, 60, 80, 0.2);
+  box-shadow: 0px 5px 15px -10px rgba(34, 60, 80, 0.2);
+}
+
+.filter {
+  
+  width: 290px;
 }
 
 .link-button {
@@ -28,8 +63,18 @@ body {
   }
 }
 
+.footer {
+  width: 100%;
+  background: white;
+  padding: 20px 0;
+  -webkit-box-shadow: 0px 5px 15px -10px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0px 5px 15px -10px rgba(34, 60, 80, 0.2);
+  box-shadow: 0px 5px 15px -10px rgba(34, 60, 80, 0.2);
+}
+
 .footer .container {
   width: 1280px;
+  margin: 0 auto;
   display: flex;
   justify-content: center;
   gap: 20px;

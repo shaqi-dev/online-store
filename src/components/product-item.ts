@@ -2,7 +2,7 @@ import { Product } from '../models/product';
 import Component from './base-component';
 import './product-item.scss';
 
-export default class ProjectItem
+export default class ProductItem
   extends Component<HTMLDivElement, HTMLDivElement> {
   private product: Product;
 
