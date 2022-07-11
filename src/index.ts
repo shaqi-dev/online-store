@@ -21,11 +21,11 @@ const addToCartHandler = (e: Event) => {
   if (!state.includes(target.id)) {
     productCart.state = [...state, target.id];
     target.classList.add('product--in-cart');
-    addToCartBtn.disabled = true;
+    addToCartBtn.innerText = 'Remove';
   } else {
     productCart.state = state.filter((id) => id !== target.id);
     target.classList.remove('product--in-cart');
-    addToCartBtn.disabled = false;
+    addToCartBtn.innerText = 'Add to cart';
   }
 };
 
