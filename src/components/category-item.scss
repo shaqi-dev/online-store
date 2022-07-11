@@ -1,0 +1,14 @@
+@use '../scss/variables' as *;
+
+.categories__item {
+  line-height: 1.5;
+  cursor: pointer;
+  transition: 80ms all ease-in-out;
+  &:hover {
+    color: $color-accent-hover;
+  }
+  &--active {
+    color: $color-accent-primary;
+    font-weight: bold;
+  }
+}

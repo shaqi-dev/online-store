@@ -1,5 +1,5 @@
 import Component from './base-component';
-// import './product-item.scss';
+import './category-item.scss';
 
 export default class CategoryItem
   extends Component<HTMLUListElement, HTMLLIElement> {
@@ -8,7 +8,6 @@ export default class CategoryItem
   constructor(hostElementSelector: string, category: string) {
     super('category-item', hostElementSelector, false);
     this.category = category;
-    console.log(this.category);
 
     this.renderContent();
   }
