@@ -1,6 +1,5 @@
-import axios from 'axios';
 import Component from './base-component';
-import ProductItem from './product-item';
+import ProductItem, { EventListener } from './product-item';
 import CategoryList from './category-list';
 import { Filters } from './product-filters';
 import { Product } from '../models/product';
@@ -11,14 +10,14 @@ export default class ProductsList
   extends Component<HTMLDivElement, HTMLElement> {
   private productList: Product[];
 
-  private filteredList: Product[];
+  private listeners: EventListener[];
 
   private categories: string[];
 
-  constructor() {
+  public constructor(listeners: EventListener[] = []) {
     super('product-list', '.main .container', false);
     this.productList = products;
-    this.filteredList = [];
+    this.listeners = listeners;
     this.categories = [];
 
     this.getCategories();
@@ -27,7 +26,7 @@ export default class ProductsList
 
   public renderContent() {
     this.element.innerHTML = '';
-    this.productList.forEach((product) => new ProductItem('.products', product));
+    this.productList.forEach((product) => new ProductItem('.products', product, this.listeners));
   }
 
   public useFilters(filters: Filters) {

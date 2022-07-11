@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 export default abstract class Stateful<T> {
-  private _state: T;
+  protected _state: T;
 
   get state() {
     return this._state;

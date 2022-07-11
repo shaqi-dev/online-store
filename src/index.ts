@@ -1,12 +1,38 @@
 import ProductsList from './components/product-list';
 import ProductFilters from './components/product-filters';
 import ProductCart from './components/product-cart';
+import { EventListener } from './components/product-item';
 import './scss/style.scss';
 import './index.scss';
 
-const productsList = new ProductsList();
+const productCart = new ProductCart<HTMLDivElement>('.cart');
+const addToCartHandler = (e: Event) => {
+  let target = e.target as HTMLElement;
+
+  while (!target.id) {
+    target = target.parentElement as HTMLElement;
+  }
+
+  if (target.classList.contains('product--not-in-stock')) return;
+
+  const { state } = productCart;
+  const addToCartBtn = target.querySelector('.link-button--add-to-cart') as HTMLButtonElement;
+
+  if (!state.includes(target.id)) {
+    productCart.state = [...state, target.id];
+    target.classList.add('product--in-cart');
+    addToCartBtn.disabled = true;
+  } else {
+    productCart.state = state.filter((id) => id !== target.id);
+    target.classList.remove('product--in-cart');
+    addToCartBtn.disabled = false;
+  }
+};
+
+const addToCartListener: EventListener = ['click', addToCartHandler];
+
+const productsList = new ProductsList([addToCartListener]);
 const productFilters = new ProductFilters();
-const productCart = new ProductCart();
 
 const categories = document.querySelectorAll('.categories__item') as NodeListOf<HTMLLIElement>;
 

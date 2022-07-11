@@ -33,13 +33,19 @@
   }
 }
 
-.product--not-in-stock {
-  img {
-    -webkit-filter: grayscale(100%);
-    filter: grayscale(100%);
+.product {
+  &--not-in-stock {
+    img {
+      -webkit-filter: grayscale(100%);
+      filter: grayscale(100%);
+    }
+  
+    color: $color-text-disabled;
   }
 
-  color: $color-text-disabled;
+  &--in-cart {
+    outline: $color-accent-primary solid 3px;
+  }  
 }
 
 .product__title {

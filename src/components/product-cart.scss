@@ -1,0 +1,19 @@
+@use '../scss/variables' as *;
+
+.cart {
+  position: relative;
+}
+
+.cart__icon {
+  height: 44px;
+}
+
+.cart__counter {
+  width: 21px;
+  position: absolute;
+  text-align: center;
+  top: 16px;
+  left: 10px;
+  color: $color-accent-hover;
+  font-weight: bold;
+}

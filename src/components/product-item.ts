@@ -2,13 +2,17 @@ import { Product } from '../models/product';
 import Component from './base-component';
 import './product-item.scss';
 
+export type EventListener = [string, (e: Event) => void];
 export default class ProductItem
   extends Component<HTMLDivElement, HTMLDivElement> {
   private product: Product;
 
-  constructor(hostElementSelector: string, product: Product) {
+  private listeners: EventListener[];
+
+  constructor(hostElementSelector: string, product: Product, listeners: EventListener[]) {
     super('product-item', hostElementSelector, false, product.id);
     this.product = product;
+    this.listeners = listeners;
 
     this.renderContent();
   }
@@ -35,5 +39,11 @@ export default class ProductItem
       this.element.classList.add('product--not-in-stock');
       addToCartBtn.disabled = true;
     }
+
+    this.attachListeners();
+  }
+
+  private attachListeners() {
+    this.listeners.forEach((listener) => this.element.addEventListener(listener[0], listener[1]));
   }
 }
