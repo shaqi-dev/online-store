@@ -35,7 +35,7 @@ export default class ProductItem
     } = this.product;
 
     image.src = img;
-    title.innerText = `${brand} ${model} ${capacity ? `${capacity}GB ` : ''}${size ? `${size} ` : ''}(${color})`;
+    title.innerText = `${brand} ${model} ${size ? `${size}` : `${capacity}GB`} (${color})`;
     release.innerText = `Release: ${releaseDate}`;
     inStock.innerText = `${inStockCount > 0 ? `In stock: ${inStockCount} pcs.` : 'Not in stock'}`;
     priceEl.innerText = `$${price}`;

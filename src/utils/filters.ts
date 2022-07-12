@@ -11,7 +11,7 @@ export interface Filters {
   sort: SortFilters;
   brand: string[];
   color: string[];
-  capacity: number[];
+  capacity: string[];
 }
 
 export const initialState: Filters = {

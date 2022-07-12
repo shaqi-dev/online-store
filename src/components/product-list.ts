@@ -36,19 +36,40 @@ export default class ProductsList
     ));
   }
 
-  public useCategoryFilter(filters: Filters) {
+  public useFilters(filters: Filters) {
+    this.useCategoryFilter(filters);
+    this.useCheckboxFilter(filters);
+    this.useSortFilter(filters);
+
+    this.renderContent();
+  }
+
+  private useCheckboxFilter(filters: Filters) {
+    const { brand, color, capacity } = filters;
+
+    if (brand.length > 0 || color.length > 0 || capacity.length > 0) {
+      this.products = this.products.filter((product) => {
+        if (brand.length > 0 && !brand.includes(product.brand)) return false;
+        if (color.length > 0 && !color.includes(product.color)) return false;
+        if (capacity.length > 0 && !capacity.includes(product.capacity)) return false;
+        return true;
+      });
+    }
+  }
+
+  private useCategoryFilter(filters: Filters) {
     const { category } = filters;
+
+    console.log(filters);
 
     if (category.toLowerCase() !== 'all') {
       this.products = products.filter((product) => product.category === category.toLowerCase());
     } else {
       this.products = products;
     }
-
-    this.renderContent();
   }
 
-  public useSortFilter(filters: Filters) {
+  private useSortFilter(filters: Filters) {
     const { sort } = filters;
 
     const sortedByName = () => this.products.sort((a, b) => {
@@ -77,7 +98,5 @@ export default class ProductsList
       default:
         this.products = this.products.sort((a, b) => +a.id - +b.id);
     }
-
-    this.renderContent();
   }
 }
