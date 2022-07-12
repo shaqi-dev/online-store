@@ -1,12 +1,16 @@
 import ProductsList from './components/product-list';
 import ProductFilters from './components/product-filters';
+import SortFilters from './models/sort-filters';
 import ProductCart from './components/product-cart';
 import { EventListener } from './components/product-item';
 import './scss/style.scss';
 import './index.scss';
 
+const productFilters = new ProductFilters();
+
+// Cart
 const productCart = new ProductCart<HTMLDivElement>('.cart');
-const addToCartHandler = (e: Event) => {
+function addToCartHandler(e: Event) {
   let target = e.target as HTMLElement;
 
   while (!target.id) {
@@ -27,15 +31,14 @@ const addToCartHandler = (e: Event) => {
     target.classList.remove('product--in-cart');
     addToCartBtn.innerText = 'Add to cart';
   }
-};
-
+}
 const addToCartListener: EventListener = ['click', addToCartHandler];
 
-const productsList = new ProductsList([addToCartListener]);
-const productFilters = new ProductFilters();
+// Product List
+const productsList = new ProductsList(productFilters, [addToCartListener]);
 
+// Category Filter
 const categories = document.querySelectorAll('.categories__item') as NodeListOf<HTMLLIElement>;
-
 const setActiveCategory = (nextActive: HTMLLIElement) => {
   const currentActive = document.querySelector('.categories__item--active') as HTMLLIElement;
   if (currentActive !== nextActive) {
@@ -46,8 +49,26 @@ const setActiveCategory = (nextActive: HTMLLIElement) => {
       ...productFilters.state,
       category: nextActive.innerText.toLowerCase(),
     };
-    productsList.useFilters(productFilters.state);
+
+    productsList.useCategoryFilter();
   }
 };
-
 categories.forEach((button) => button.addEventListener('click', (e) => setActiveCategory(e.target as HTMLLIElement)));
+
+// Sort Filter
+const sortInput = document.querySelector('#sort-filter') as HTMLSelectElement;
+const setSortFilter = (select: HTMLSelectElement) => {
+  const { value } = select;
+
+  console.log(value);
+
+  productFilters.state = {
+    ...productFilters.state,
+    sort: value as SortFilters,
+  };
+
+  console.log(productFilters.state);
+
+  productsList.useSortFilter();
+};
+sortInput.addEventListener('change', (e) => setSortFilter(e.target as HTMLSelectElement));

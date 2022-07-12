@@ -233,7 +233,7 @@ const products: Product[] = [
     id: '20',
     category: 'tablet',
     brand: 'Apple',
-    releaseDate: 'September 24, 2021',
+    releaseDate: 'March 18, 2022',
     color: 'Blue',
     model: 'iPad Air 2022',
     capacity: 64,

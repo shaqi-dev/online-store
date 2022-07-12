@@ -28,7 +28,18 @@ body {
 
 .main .container {
   display: flex;
+  flex-direction: column;
   max-width: 1280px;
+  gap: 40px;
+}
+
+.main__header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.main__body {
+  display: flex;
   gap: 40px;
 }
 

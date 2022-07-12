@@ -22,9 +22,27 @@
 		</header>
 		<main class="main">
 			<div class="container">
-				<aside class="product-filters">
-					<div class="filter"></div>
-				</aside>
+				<div class="main__header">
+					<div class="main__filter">
+						<span>Search: </span>
+						<input type="text" id="search-filter">
+					</div>
+					<div class="main__filter">
+						<span>Sort by: </span>
+						<select name="sort" id="sort-filter">
+							<option value="DEFAULT">Default</option>
+							<option value="NAME">Name (A => Z)</option>
+							<option value="NAME_REVERSE">Name (Z => A)</option>
+							<option value="DATE_NEW_TO_OLD">Release date (New => Old)</option>
+							<option value="DATE_OLD_TO_NEW">Release date (Old => New)</option>
+						</select>
+					</div>
+				</div>
+				<div class="main__body">
+					<aside class="product-filters">
+						<div class="filter"></div>
+					</aside>
+				</div>
 			</div>
 		</main>
 		<footer class="footer">
