@@ -1,0 +1,21 @@
+@use '../scss/variables' as *;
+
+.product-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.filter {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.filter__title {
+  font-weight: bold;
+}
+
+.filter-checkbox__text-label {
+  cursor: pointer;
+}

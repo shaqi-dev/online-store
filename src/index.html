@@ -40,7 +40,21 @@
 				</div>
 				<div class="main__body">
 					<aside class="product-filters">
-						<div class="filter"></div>
+						<div class="filter quantity-filter">
+							<span class="filter__title">Quantity</span>
+						</div>
+						<div class="filter release-date-filter">
+							<span class="filter__title">Release date</span>
+						</div>
+						<div class="filter brand-filter">
+							<span class="filter__title">Brand</span>
+						</div>
+						<div class="filter color-filter">
+							<span class="filter__title">Color</span>
+						</div>
+						<div class="filter capacity-filter">
+							<span class="filter__title">Capacity</span>
+						</div>
 					</aside>
 				</div>
 			</div>
@@ -63,6 +77,13 @@
 				</p>
 			</div>
 		</footer>
+
+		<template id="filter-checkbox">
+			<label for="" class="filter-checkbox">
+				<input type="checkbox" id="" class="filter-checkbox__input">
+				<span class="filter-checkbox__text-label"></span>
+			</label>
+		</template>
 
 		<template id="category-list">
 			<ul class="categories"></ul>
