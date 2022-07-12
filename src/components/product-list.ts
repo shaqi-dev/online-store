@@ -2,6 +2,7 @@ import Component from './base-component';
 import ProductItem, { EventListener } from './product-item';
 import CategoryList from './category-list';
 import ProductFilters from './product-filters';
+import ProductCart from './product-cart';
 import SortFilters from '../models/sort-filters';
 import { Product } from '../models/product';
 import products from '../db/products';
@@ -17,10 +18,17 @@ export default class ProductsList
 
   private categories: string[];
 
-  public constructor(filters: ProductFilters, listeners: EventListener[] = []) {
+  private productCart: ProductCart<HTMLDivElement>;
+
+  public constructor(
+    filters: ProductFilters,
+    cart: ProductCart<HTMLDivElement>,
+    listeners: EventListener[] = [],
+  ) {
     super('product-list', '.main__body', false);
     this.productList = products;
     this.filters = filters;
+    this.productCart = cart;
     this.listeners = listeners;
     this.categories = [];
 
@@ -30,7 +38,12 @@ export default class ProductsList
 
   public renderContent() {
     this.element.innerHTML = '';
-    this.productList.forEach((product) => new ProductItem('.products', product, this.listeners));
+    this.productList.forEach((product) => new ProductItem(
+      '.products',
+      product,
+      this.productCart.state.includes(product.id),
+      this.listeners,
+    ));
   }
 
   public useCategoryFilter() {

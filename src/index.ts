@@ -35,7 +35,7 @@ function addToCartHandler(e: Event) {
 const addToCartListener: EventListener = ['click', addToCartHandler];
 
 // Product List
-const productsList = new ProductsList(productFilters, [addToCartListener]);
+const productsList = new ProductsList(productFilters, productCart, [addToCartListener]);
 
 // Category Filter
 const categories = document.querySelectorAll('.categories__item') as NodeListOf<HTMLLIElement>;
@@ -72,3 +72,5 @@ const setSortFilter = (select: HTMLSelectElement) => {
   productsList.useSortFilter();
 };
 sortInput.addEventListener('change', (e) => setSortFilter(e.target as HTMLSelectElement));
+
+export default productCart;

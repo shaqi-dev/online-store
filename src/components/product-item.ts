@@ -9,7 +9,12 @@ export default class ProductItem
 
   private listeners: EventListener[];
 
-  constructor(hostElementSelector: string, product: Product, listeners: EventListener[]) {
+  constructor(
+    hostElementSelector: string,
+    product: Product,
+    private isInCart: boolean,
+    listeners: EventListener[],
+  ) {
     super('product-item', hostElementSelector, false, product.id);
     this.product = product;
     this.listeners = listeners;
@@ -38,6 +43,11 @@ export default class ProductItem
     if (inStockCount === 0) {
       this.element.classList.add('product--not-in-stock');
       addToCartBtn.disabled = true;
+    }
+
+    if (this.isInCart) {
+      this.element.classList.add('product--in-cart');
+      addToCartBtn.innerText = 'Remove';
     }
 
     this.attachListeners();
