@@ -12,6 +12,7 @@ export interface Filters {
   brand: string[];
   color: string[];
   capacity: string[];
+  popular: boolean;
 }
 
 export const initialState: Filters = {
@@ -20,4 +21,5 @@ export const initialState: Filters = {
   brand: [],
   color: [],
   capacity: [],
+  popular: false,
 };

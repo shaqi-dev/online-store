@@ -45,7 +45,9 @@ export default class ProductsList
   }
 
   private useCheckboxFilter(filters: Filters) {
-    const { brand, color, capacity } = filters;
+    const {
+      brand, color, capacity, popular,
+    } = filters;
 
     if (brand.length > 0 || color.length > 0 || capacity.length > 0) {
       this.products = this.products.filter((product) => {
@@ -54,6 +56,10 @@ export default class ProductsList
         if (capacity.length > 0 && !capacity.includes(product.capacity)) return false;
         return true;
       });
+    }
+
+    if (popular) {
+      this.products = this.products.filter((product) => product.popular);
     }
   }
 

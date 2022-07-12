@@ -12,6 +12,7 @@ const products: Product[] = [
     capacity: '128',
     img: './assets/images/products/apple-iphone-13-midnight.jpeg',
     inStockCount: 8,
+    popular: true,
   },
   {
     id: '2',
@@ -24,6 +25,7 @@ const products: Product[] = [
     capacity: '256',
     img: './assets/images/products/apple-iphone-13-midnight.jpeg',
     inStockCount: 5,
+    popular: true,
   },
   {
     id: '3',
@@ -36,6 +38,7 @@ const products: Product[] = [
     capacity: '512',
     img: './assets/images/products/apple-iphone-13-midnight.jpeg',
     inStockCount: 23,
+    popular: false,
   },
   {
     id: '4',
@@ -48,6 +51,7 @@ const products: Product[] = [
     capacity: '128',
     img: './assets/images/products/apple-iphone-13-green.jpeg',
     inStockCount: 17,
+    popular: false,
   },
   {
     id: '5',
@@ -60,6 +64,7 @@ const products: Product[] = [
     capacity: '256',
     img: './assets/images/products/apple-iphone-13-green.jpeg',
     inStockCount: 12,
+    popular: false,
   },
   {
     id: '6',
@@ -72,6 +77,7 @@ const products: Product[] = [
     capacity: '512',
     img: './assets/images/products/apple-iphone-13-green.jpeg',
     inStockCount: 28,
+    popular: false,
   },
   {
     id: '7',
@@ -84,6 +90,7 @@ const products: Product[] = [
     capacity: '128',
     img: './assets/images/products/samsung-galaxy-a52-black.jpeg',
     inStockCount: 42,
+    popular: true,
   },
   {
     id: '8',
@@ -96,6 +103,7 @@ const products: Product[] = [
     capacity: '128',
     img: './assets/images/products/samsung-galaxy-a52-white.jpeg',
     inStockCount: 37,
+    popular: true,
   },
   {
     id: '9',
@@ -108,6 +116,7 @@ const products: Product[] = [
     capacity: '256',
     img: './assets/images/products/apple-macbook-air-13-m1-2020-space-gray.jpg',
     inStockCount: 18,
+    popular: true,
   },
   {
     id: '10',
@@ -120,6 +129,7 @@ const products: Product[] = [
     capacity: '256',
     img: './assets/images/products/apple-macbook-pro-14-m1-2021-space-gray.jpg',
     inStockCount: 2,
+    popular: true,
   },
   {
     id: '11',
@@ -132,6 +142,7 @@ const products: Product[] = [
     capacity: '512',
     img: './assets/images/products/apple-macbook-pro-14-m1-2021-midnight.jpg',
     inStockCount: 8,
+    popular: true,
   },
   {
     id: '12',
@@ -145,6 +156,7 @@ const products: Product[] = [
     price: 749,
     img: './assets/images/products/apple-watch-series-7-pride-edition.jpg',
     inStockCount: 74,
+    popular: false,
   },
   {
     id: '13',
@@ -158,6 +170,7 @@ const products: Product[] = [
     price: 699,
     img: './assets/images/products/apple-watch-series-7-nectarine-peony.jpg',
     inStockCount: 49,
+    popular: false,
   },
   {
     id: '14',
@@ -171,6 +184,7 @@ const products: Product[] = [
     price: 299,
     img: './assets/images/products/samsung-watch-4-classic-black.jpeg',
     inStockCount: 61,
+    popular: false,
   },
   {
     id: '15',
@@ -184,6 +198,7 @@ const products: Product[] = [
     price: 249,
     img: './assets/images/products/samsung-watch-4-classic-silver.jpeg',
     inStockCount: 83,
+    popular: false,
   },
   {
     id: '16',
@@ -197,6 +212,7 @@ const products: Product[] = [
     price: 299,
     img: './assets/images/products/samsung-watch-3-black.jpeg',
     inStockCount: 36,
+    popular: true,
   },
   {
     id: '17',
@@ -209,6 +225,7 @@ const products: Product[] = [
     price: 499,
     img: './assets/images/products/ipad-mini-2021-space-gray.png',
     inStockCount: 11,
+    popular: true,
   },
   {
     id: '18',
@@ -221,6 +238,7 @@ const products: Product[] = [
     price: 499,
     img: './assets/images/products/ipad-mini-2021-purple.png',
     inStockCount: 0,
+    popular: true,
   },
   {
     id: '19',
@@ -233,6 +251,7 @@ const products: Product[] = [
     price: 649,
     img: './assets/images/products/ipad-mini-2021-purple.png',
     inStockCount: 5,
+    popular: true,
   },
   {
     id: '20',
@@ -245,6 +264,7 @@ const products: Product[] = [
     price: 599,
     img: './assets/images/products/ipad-air-2022-blue.png',
     inStockCount: 24,
+    popular: true,
   },
 ];
 

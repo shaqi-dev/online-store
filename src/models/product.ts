@@ -10,4 +10,5 @@ export interface Product {
   size?: string,
   img: string
   inStockCount: number,
+  popular: boolean,
 }

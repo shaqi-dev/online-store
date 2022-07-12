@@ -54,9 +54,18 @@ export default class ProductFilters extends Stateful<Filters> {
       .element.addEventListener('change', this.setColorFilter.bind(this)));
     this.capacities.forEach((capacity) => new FilterCheckbox('.capacity-filter', `${capacity}GB`, 'capacity-filter')
       .element.addEventListener('change', this.setCapacityFilter.bind(this)));
+    const popular = new FilterCheckbox('.other-filter', 'popular', 'popular-filter');
+    popular.element.addEventListener('change', this.setPopularFilter.bind(this));
 
     const sortInput = document.querySelector('#sort-filter') as HTMLSelectElement;
     sortInput.addEventListener('change', (e) => this.setSortFilter(e.target as HTMLSelectElement));
+  }
+
+  private setPopularFilter(e: Event) {
+    const checkbox = e.target as HTMLInputElement;
+    this.state.popular = checkbox.checked;
+
+    this.productsList.useFilters(this.state);
   }
 
   private setBrandFilter(e: Event) {
