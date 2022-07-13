@@ -21,7 +21,8 @@
   "dependencies": {
     "axios": "^0.27.2",
     "eslint-config-airbnb-typescript": "^17.0.0",
-    "normalize.css": "^8.0.1"
+    "normalize.css": "^8.0.1",
+    "nouislider": "^15.6.0"
   },
   "devDependencies": {
     "@types/node": "^18.0.1",

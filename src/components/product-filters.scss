@@ -24,6 +24,15 @@
   font-weight: bold;
 }
 
+.filter__values {
+  display: flex;
+  justify-content: space-between;
+}
+
+.filter__value {
+  font-size: 1.6rem;
+}
+
 .filter-checkbox__text-label {
   cursor: pointer;
 }
