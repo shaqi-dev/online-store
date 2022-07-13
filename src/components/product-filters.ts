@@ -2,7 +2,9 @@ import * as noUiSlider from 'nouislider';
 import 'nouislider/dist/nouislider.css';
 import Stateful from '../models/stateful';
 import { SortFilters, Filters, initialState } from '../utils/filters';
-import products from '../db/products';
+import {
+  categories, brands, colors, capacities, releaseDates, quantities,
+} from '../db/productsService';
 import CategoryList from './category-list';
 import FilterCheckbox from './filter-checkbox';
 import ProductsList from './product-list';
@@ -11,46 +13,21 @@ import './product-filters.scss';
 export default class ProductFilters extends Stateful<Filters> {
   private productsList: ProductsList;
 
-  private categories: string[];
+  private categories: string[] = categories;
 
-  private brands: string[];
+  private brands: string[] = brands;
 
-  private colors: string[];
+  private colors: string[] = colors;
 
-  private capacities: string[];
+  private capacities: string[] = capacities;
 
-  private releaseDates: string[];
+  private releaseDates: string[] = releaseDates;
 
-  private quantities: number[];
+  private quantities: number[] = quantities;
 
   public constructor(productList: ProductsList) {
     super(initialState);
     this.productsList = productList;
-
-    this.categories = products.reduce((a: string[], c) => {
-      if (!a.includes(c.category)) a.push(c.category);
-      return a;
-    }, []);
-    this.brands = products.reduce((a: string[], c) => {
-      if (!a.includes(c.brand)) a.push(c.brand);
-      return a;
-    }, []).sort((a, b) => a.localeCompare(b));
-    this.colors = products.reduce((a: string[], c) => {
-      if (!a.includes(c.color)) a.push(c.color);
-      return a;
-    }, []).sort((a, b) => a.localeCompare(b));
-    this.capacities = products.reduce((a: string[], c) => {
-      if (!a.includes(c.capacity)) a.push(c.capacity);
-      return a;
-    }, []).sort((a, b) => +b - +a);
-    this.releaseDates = products.reduce((a: string[], c) => {
-      if (!a.includes(c.releaseDate)) a.push(c.releaseDate);
-      return a;
-    }, []).sort((a, b) => Date.parse(a) - Date.parse(b));
-    this.quantities = products.reduce((a: number[], c) => {
-      if (!a.includes(c.inStockCount)) a.push(c.inStockCount);
-      return a;
-    }, []).sort((a, b) => +a - +b);
 
     this.renderContent();
   }
@@ -62,7 +39,7 @@ export default class ProductFilters extends Stateful<Filters> {
       (e: Event) => this.setCategoryFilter(e.target as HTMLLIElement),
     ));
 
-    this.attachSliders();
+    this.attachRangeFilters();
 
     this.brands.forEach((brand) => (new FilterCheckbox('.brand-filter', brand, 'brand-filter'))
       .element.addEventListener('change', this.setBrandFilter.bind(this)));
@@ -78,7 +55,7 @@ export default class ProductFilters extends Stateful<Filters> {
     sortInput.addEventListener('change', (e) => this.setSortFilter(e.target as HTMLSelectElement));
   }
 
-  private attachSliders() {
+  private attachRangeFilters() {
     const quantitySlider = document.getElementById('quantity-filter__slider') as noUiSlider.target;
     const releaseDateSlider = document.getElementById('release-date-filter__slider') as noUiSlider.target;
 
