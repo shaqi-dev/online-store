@@ -39,9 +39,30 @@ export default class ProductsList
   public useFilters(filters: Filters) {
     this.useCategoryFilter(filters);
     this.useCheckboxFilter(filters);
+    this.useRangeFilter(filters);
     this.useSortFilter(filters);
 
     this.renderContent();
+  }
+
+  private useRangeFilter(filters: Filters) {
+    const { quantity, releaseDate } = filters;
+
+    if (quantity.length === 2) {
+      this.products = this.products.filter((product) => (
+        product.inStockCount >= quantity[0] && product.inStockCount <= quantity[1]
+      ));
+    }
+
+    if (releaseDate.length === 2) {
+      this.products = this.products.filter((product) => {
+        const productReleaseDate = Date.parse(product.releaseDate);
+        const releaseDateStart = Date.parse(releaseDate[0]);
+        const releaseDateEnd = Date.parse(releaseDate[1]);
+
+        return productReleaseDate >= releaseDateStart && productReleaseDate <= releaseDateEnd;
+      });
+    }
   }
 
   private useCheckboxFilter(filters: Filters) {
@@ -65,8 +86,6 @@ export default class ProductsList
 
   private useCategoryFilter(filters: Filters) {
     const { category } = filters;
-
-    console.log(filters);
 
     if (category.toLowerCase() !== 'all') {
       this.products = products.filter((product) => product.category === category.toLowerCase());

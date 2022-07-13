@@ -72,11 +72,15 @@ export default class ProductFilters extends Stateful<Filters> {
       element.innerHTML = Math.floor(+values[handle]).toString();
     });
 
+    quantitySlider.noUiSlider?.on('change', (values) => this.setQuantityFilter(quantityMin, quantityMax, values as [number, number]));
+
     releaseDateSlider.noUiSlider?.on('update', (values, handle) => {
       const element = releaseDateValues[handle] as HTMLSpanElement;
       const date = new Date(parseInt(`${values[handle]}`, 10));
       element.innerHTML = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
     });
+
+    releaseDateSlider.noUiSlider?.on('change', (values) => this.setReleaseDateFilter(releaseDateStart, releaseDateEnd, values as [number, number]));
   }
 
   private attachSortFilters() {
@@ -101,6 +105,34 @@ export default class ProductFilters extends Stateful<Filters> {
       'click',
       (e: Event) => this.setCategoryFilter(e.target as HTMLLIElement),
     ));
+  }
+
+  private setReleaseDateFilter(min: number, max: number, values: [number, number]) {
+    const formattedStartDate = new Date(parseInt(`${values[0]}`, 10)).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    const formattedEndDate = new Date(parseInt(`${values[1]}`, 10)).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+    if (values[0] > min || values[1] < max) {
+      this.state.releaseDate = [formattedStartDate, formattedEndDate];
+    } else {
+      this.state.releaseDate = [];
+    }
+
+    console.log(this.state.releaseDate);
+
+    this.productsList.useFilters(this.state);
+  }
+
+  private setQuantityFilter(start: number, end: number, values: [number, number]) {
+    const roundedMin = Math.floor(values[0]);
+    const roundedMax = Math.floor(values[1]);
+
+    if (roundedMin > start || roundedMax < end) {
+      this.state.quantity = [roundedMin, roundedMax];
+    } else {
+      this.state.quantity = [];
+    }
+
+    this.productsList.useFilters(this.state);
   }
 
   private setPopularFilter(e: Event) {

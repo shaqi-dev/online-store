@@ -13,6 +13,8 @@ export interface Filters {
   color: string[];
   capacity: string[];
   popular: boolean;
+  quantity: [number, number] | [];
+  releaseDate: [string, string] | []
 }
 
 export const initialState: Filters = {
@@ -22,4 +24,6 @@ export const initialState: Filters = {
   color: [],
   capacity: [],
   popular: false,
+  quantity: [],
+  releaseDate: [],
 };
