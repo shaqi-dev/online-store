@@ -6,10 +6,18 @@ export default class CheckboxFilter
 
   private checkboxId: string;
 
-  constructor(hostElementSelector: string, label: string, filterType: string) {
+  private checked: boolean;
+
+  constructor(
+    hostElementSelector: string,
+    label: string,
+    filterType: string,
+    checked = false,
+  ) {
     super('filter-checkbox', hostElementSelector, false);
     this.label = label;
     this.checkboxId = `${filterType}-${label}`;
+    this.checked = checked;
 
     this.renderContent();
   }
@@ -22,5 +30,7 @@ export default class CheckboxFilter
     labelEl.htmlFor = this.checkboxId;
     checkbox.id = this.checkboxId;
     textLabel.innerText = this.label;
+
+    if (this.checked) checkbox.checked = true;
   }
 }

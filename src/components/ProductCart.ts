@@ -10,6 +10,7 @@ export default class ProductCart<T extends HTMLElement> extends Stateful<string[
 
   public set state(nextState: string[]) {
     this._state = nextState;
+    localStorage.setItem('productCart', JSON.stringify(nextState));
     this.updateCounter();
   }
 
@@ -18,7 +19,8 @@ export default class ProductCart<T extends HTMLElement> extends Stateful<string[
   }
 
   public constructor(cartSelector: string) {
-    super(initialState);
+    const savedState = localStorage.getItem('productCart');
+    super(savedState ? JSON.parse(savedState) : initialState);
 
     const cart = document.querySelector(cartSelector) as T;
     this.cartElement = cart;
@@ -27,6 +29,8 @@ export default class ProductCart<T extends HTMLElement> extends Stateful<string[
     counter.classList.add('cart__counter');
     this.counterElement = counter;
     this.cartElement.append(counter);
+
+    this.updateCounter();
   }
 
   public addToCart(e: Event) {
@@ -51,7 +55,7 @@ export default class ProductCart<T extends HTMLElement> extends Stateful<string[
     }
   }
 
-  public updateCounter() {
+  private updateCounter() {
     if (this._state.length > 0) {
       this.counterElement.innerText = `${this._state.length}`;
       this.counterElement.style.display = 'block';

@@ -1,6 +1,6 @@
 import Component from './Component';
 import ProductItem, { EventListener } from './ProductItem';
-import { SortFilters, Filters } from '../utils/filters';
+import { SortFilters, Filters, initialState } from '../utils/filters';
 import ProductCart from './ProductCart';
 import { Product } from '../models/product';
 import products from '../db/products';
@@ -22,8 +22,9 @@ export default class ProductsList
     this.products = products;
     this.productCart = cart;
     this.listeners = listeners;
+    const filters = localStorage.getItem('productFilters');
 
-    this.renderContent();
+    this.useFilters(filters ? JSON.parse(filters) : initialState);
   }
 
   public renderContent() {
@@ -37,6 +38,8 @@ export default class ProductsList
   }
 
   public useFilters(filters: Filters) {
+    localStorage.setItem('productFilters', JSON.stringify(filters));
+
     this.useCategoryFilter(filters);
     this.useSearchFilter(filters);
     this.useCheckboxFilter(filters);

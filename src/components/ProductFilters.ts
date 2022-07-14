@@ -27,7 +27,8 @@ export default class ProductFilters extends Stateful<Filters> {
   private quantities: number[] = quantities;
 
   public constructor(productList: ProductsList) {
-    super(initialState);
+    const filters = localStorage.getItem('productFilters');
+    super(filters ? JSON.parse(filters) : initialState);
     this.productsList = productList;
 
     this.renderContent();
@@ -69,6 +70,17 @@ export default class ProductFilters extends Stateful<Filters> {
       range: { min: releaseDateStart, max: releaseDateEnd },
     });
 
+    if (this.state.quantity.length === 2) {
+      quantitySlider.noUiSlider?.set([...this.state.quantity]);
+    }
+
+    if (this.state.releaseDate.length === 2) {
+      releaseDateSlider.noUiSlider?.set([
+        Date.parse(this.state.releaseDate[0]),
+        Date.parse(this.state.releaseDate[1]),
+      ]);
+    }
+
     quantitySlider.noUiSlider?.on('update', (values, handle) => {
       const element = quantityValues[handle] as HTMLSpanElement;
       element.innerHTML = Math.floor(+values[handle]).toString();
@@ -87,28 +99,45 @@ export default class ProductFilters extends Stateful<Filters> {
 
   private attachSearchFilter() {
     const input = document.getElementById('search-filter') as HTMLInputElement;
+    if (this.state.search !== '') input.value = this.state.search;
     const callback = (e: Event) => this.setSearchFilter(e);
     input.addEventListener('input', _.debounce(callback, 500));
   }
 
   private attachSortFilters() {
     const sortInput = document.querySelector('#sort-filter') as HTMLSelectElement;
+    sortInput.value = this.state.sort;
     sortInput.addEventListener('change', (e) => this.setSortFilter(e.target as HTMLSelectElement));
   }
 
   private attachChekboxFilters() {
-    this.brands.forEach((brand) => new CheckboxFilter('.brand-filter', brand, 'brand-filter')
-      .element.addEventListener('change', this.setBrandFilter.bind(this)));
-    this.colors.forEach((color) => new CheckboxFilter('.color-filter', color, 'color-filter')
-      .element.addEventListener('change', this.setColorFilter.bind(this)));
-    this.capacities.forEach((capacity) => new CheckboxFilter('.capacity-filter', `${capacity}GB`, 'capacity-filter')
-      .element.addEventListener('change', this.setCapacityFilter.bind(this)));
-    const popular = new CheckboxFilter('.other-filter', 'popular', 'popular-filter');
-    popular.element.addEventListener('change', this.setPopularFilter.bind(this));
+    this.brands.forEach((brand) => new CheckboxFilter(
+      '.brand-filter',
+      brand,
+      'brand-filter',
+      this.state.brand.includes(brand),
+    ).element.addEventListener('change', this.setBrandFilter.bind(this)));
+
+    this.colors.forEach((color) => new CheckboxFilter(
+      '.color-filter',
+      color,
+      'color-filter',
+      this.state.color.includes(color),
+    ).element.addEventListener('change', this.setColorFilter.bind(this)));
+
+    this.capacities.forEach((capacity) => new CheckboxFilter(
+      '.capacity-filter',
+      `${capacity}GB`,
+      'capacity-filter',
+      this.state.capacity.includes(capacity),
+    ).element.addEventListener('change', this.setCapacityFilter.bind(this)));
+
+    (new CheckboxFilter('.other-filter', 'popular', 'popular-filter', this.state.popular)
+      .element.addEventListener('change', this.setPopularFilter.bind(this)));
   }
 
   private attachCategoryFilters() {
-    const categoryList = new CategoryList(this.categories);
+    const categoryList = new CategoryList(this.categories, this.state.category);
     categoryList.elements.forEach((button) => button.addEventListener(
       'click',
       (e: Event) => this.setCategoryFilter(e.target as HTMLLIElement),
