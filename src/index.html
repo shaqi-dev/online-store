@@ -26,18 +26,15 @@
 		<main class="main">
 			<div class="container">
 				<div class="main__header">
-					<div class="main__filter">
-						<span>Search: </span>
-						<input type="text" id="search-filter" />
-					</div>
-					<div class="main__filter">
+					<input type="text" id="search-filter" class="search-filter" placeholder="Search in store" autocomplete="off"/>
+					<div class="main__sort-filter">
 						<span>Sort by: </span>
-						<select name="sort" id="sort-filter">
+						<select name="sort" id="sort-filter" class="sort-filter">
 							<option value="DEFAULT">Default</option>
-							<option value="NAME">Name (A => Z)</option>
-							<option value="NAME_REVERSE">Name (Z => A)</option>
-							<option value="DATE_NEW_TO_OLD">Release date (New => Old)</option>
-							<option value="DATE_OLD_TO_NEW">Release date (Old => New)</option>
+							<option value="NAME">Name (A to Z)</option>
+							<option value="NAME_REVERSE">Name (Z to A)</option>
+							<option value="DATE_NEW_TO_OLD">Release Date (New to Old)</option>
+							<option value="DATE_OLD_TO_NEW">Release Date (Old to New)</option>
 						</select>
 					</div>
 				</div>
