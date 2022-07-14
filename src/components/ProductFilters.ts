@@ -199,7 +199,7 @@ export default class ProductFilters extends Stateful<Filters> {
       this.state.capacity.includes(capacity),
     ).element.addEventListener('change', this.setCapacityFilter.bind(this)));
 
-    (new CheckboxFilter('.other-filter', 'popular', 'popular-filter', this.state.popular)
+    (new CheckboxFilter('.other-filter', 'Popular', 'popular-filter', this.state.popular)
       .element.addEventListener('change', this.setPopularFilter.bind(this)));
   }
 
