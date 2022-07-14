@@ -1,5 +1,6 @@
 import * as noUiSlider from 'nouislider';
 import 'nouislider/dist/nouislider.css';
+import _ from 'lodash';
 import Stateful from '../models/stateful';
 import { SortFilters, Filters, initialState } from '../utils/filters';
 import {
@@ -37,6 +38,7 @@ export default class ProductFilters extends Stateful<Filters> {
     this.attachRangeFilters();
     this.attachChekboxFilters();
     this.attachSortFilters();
+    this.attachSearchFilter();
   }
 
   private attachRangeFilters() {
@@ -83,6 +85,13 @@ export default class ProductFilters extends Stateful<Filters> {
     releaseDateSlider.noUiSlider?.on('change', (values) => this.setReleaseDateFilter(releaseDateStart, releaseDateEnd, values as [number, number]));
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  private attachSearchFilter() {
+    const input = document.getElementById('search-filter') as HTMLInputElement;
+    const callback = (e: Event) => this.setSearchFilter(e);
+    input.addEventListener('input', _.debounce(callback, 500));
+  }
+
   private attachSortFilters() {
     const sortInput = document.querySelector('#sort-filter') as HTMLSelectElement;
     sortInput.addEventListener('change', (e) => this.setSortFilter(e.target as HTMLSelectElement));
@@ -105,6 +114,17 @@ export default class ProductFilters extends Stateful<Filters> {
       'click',
       (e: Event) => this.setCategoryFilter(e.target as HTMLLIElement),
     ));
+  }
+
+  private setSearchFilter(e: Event) {
+    const target = e.target as HTMLInputElement;
+    if (target.value) {
+      this.state.search = target.value;
+    } else {
+      this.state.search = '';
+    }
+
+    this.productsList.useFilters(this.state);
   }
 
   private setReleaseDateFilter(min: number, max: number, values: [number, number]) {

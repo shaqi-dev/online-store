@@ -15,6 +15,7 @@ export interface Filters {
   popular: boolean;
   quantity: [number, number] | [];
   releaseDate: [string, string] | []
+  search: string;
 }
 
 export const initialState: Filters = {
@@ -26,4 +27,5 @@ export const initialState: Filters = {
   popular: false,
   quantity: [],
   releaseDate: [],
+  search: '',
 };

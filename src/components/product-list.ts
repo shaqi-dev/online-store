@@ -38,11 +38,36 @@ export default class ProductsList
 
   public useFilters(filters: Filters) {
     this.useCategoryFilter(filters);
+    this.useSearchFilter(filters);
     this.useCheckboxFilter(filters);
     this.useRangeFilter(filters);
     this.useSortFilter(filters);
 
     this.renderContent();
+  }
+
+  private useSearchFilter(filters: Filters) {
+    const search = filters.search.toLowerCase();
+
+    if (search !== '') {
+      const result = this.products.filter((product) => {
+        const brand = product.brand.toLowerCase();
+        const model = product.model.toLowerCase();
+        const color = product.color.toLowerCase();
+        const capacityORsize = product.size
+          ? product.size.toLowerCase()
+          : product.capacity.toLowerCase();
+
+        const isExist = (prop: string) => prop.indexOf(search) > -1;
+
+        return isExist(brand)
+          || isExist(model)
+          || isExist(color)
+          || isExist(capacityORsize);
+      });
+
+      this.products = result;
+    }
   }
 
   private useRangeFilter(filters: Filters) {
