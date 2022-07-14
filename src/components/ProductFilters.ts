@@ -26,10 +26,17 @@ export default class ProductFilters extends Stateful<Filters> {
 
   private quantities: number[] = quantities;
 
+  private quantitySlider: noUiSlider.target;
+
+  private releaseDateSlider: noUiSlider.target;
+
   public constructor(productList: ProductsList) {
     const filters = localStorage.getItem('productFilters');
     super(filters ? JSON.parse(filters) : initialState);
     this.productsList = productList;
+
+    this.quantitySlider = document.getElementById('quantity-filter__slider') as noUiSlider.target;
+    this.releaseDateSlider = document.getElementById('release-date-filter__slider') as noUiSlider.target;
 
     this.renderContent();
   }
@@ -40,11 +47,15 @@ export default class ProductFilters extends Stateful<Filters> {
     this.attachChekboxFilters();
     this.attachSortFilters();
     this.attachSearchFilter();
+    this.attachResetFilters();
+  }
+
+  private attachResetFilters() {
+    const resetBtn = document.querySelector('.product-filters__reset-button') as HTMLButtonElement;
+    resetBtn.addEventListener('click', () => this.resetFilters());
   }
 
   private attachRangeFilters() {
-    const quantitySlider = document.getElementById('quantity-filter__slider') as noUiSlider.target;
-    const releaseDateSlider = document.getElementById('release-date-filter__slider') as noUiSlider.target;
     const quantityMin = this.quantities[0];
     const quantityMax = this.quantities[this.quantities.length - 1];
     const releaseDateStart = Date.parse(this.releaseDates[0]);
@@ -58,43 +69,57 @@ export default class ProductFilters extends Stateful<Filters> {
       document.getElementById('release-date-filter__value-end'),
     ];
 
-    noUiSlider.create(quantitySlider, {
+    noUiSlider.create(this.quantitySlider, {
       start: [quantityMin, quantityMax],
       connect: true,
       range: { min: quantityMin, max: quantityMax },
     });
 
-    noUiSlider.create(releaseDateSlider, {
+    noUiSlider.create(this.releaseDateSlider, {
       start: [releaseDateStart, releaseDateEnd],
       connect: true,
       range: { min: releaseDateStart, max: releaseDateEnd },
     });
 
     if (this.state.quantity.length === 2) {
-      quantitySlider.noUiSlider?.set([...this.state.quantity]);
+      this.quantitySlider.noUiSlider?.set([...this.state.quantity]);
     }
 
     if (this.state.releaseDate.length === 2) {
-      releaseDateSlider.noUiSlider?.set([
+      this.releaseDateSlider.noUiSlider?.set([
         Date.parse(this.state.releaseDate[0]),
         Date.parse(this.state.releaseDate[1]),
       ]);
     }
 
-    quantitySlider.noUiSlider?.on('update', (values, handle) => {
+    this.quantitySlider.noUiSlider?.on('update', (values, handle) => {
       const element = quantityValues[handle] as HTMLSpanElement;
       element.innerHTML = Math.floor(+values[handle]).toString();
     });
 
-    quantitySlider.noUiSlider?.on('change', (values) => this.setQuantityFilter(quantityMin, quantityMax, values as [number, number]));
+    this.quantitySlider.noUiSlider?.on(
+      'change',
+      (values) => this.setQuantityFilter(
+        quantityMin,
+        quantityMax,
+        values as [number, number],
+      ),
+    );
 
-    releaseDateSlider.noUiSlider?.on('update', (values, handle) => {
+    this.releaseDateSlider.noUiSlider?.on('update', (values, handle) => {
       const element = releaseDateValues[handle] as HTMLSpanElement;
       const date = new Date(parseInt(`${values[handle]}`, 10));
       element.innerHTML = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
     });
 
-    releaseDateSlider.noUiSlider?.on('change', (values) => this.setReleaseDateFilter(releaseDateStart, releaseDateEnd, values as [number, number]));
+    this.releaseDateSlider.noUiSlider?.on(
+      'change',
+      (values) => this.setReleaseDateFilter(
+        releaseDateStart,
+        releaseDateEnd,
+        values as [number, number],
+      ),
+    );
   }
 
   private attachSearchFilter() {
@@ -142,6 +167,25 @@ export default class ProductFilters extends Stateful<Filters> {
       'click',
       (e: Event) => this.setCategoryFilter(e.target as HTMLLIElement),
     ));
+  }
+
+  private resetFilters() {
+    this.state = {
+      ...JSON.parse(JSON.stringify(initialState)),
+      category: this.state.category,
+      sort: this.state.sort,
+      search: this.state.search,
+    };
+
+    const checkboxInputs = document.querySelectorAll('.filter-checkbox__input') as NodeListOf<HTMLInputElement>;
+    for (let i = 0; i < checkboxInputs.length; i += 1) {
+      checkboxInputs[i].checked = false;
+    }
+
+    this.quantitySlider.noUiSlider?.reset();
+    this.releaseDateSlider.noUiSlider?.reset();
+
+    this.productsList.useFilters(this.state);
   }
 
   private setSearchFilter(e: Event) {
