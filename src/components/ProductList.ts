@@ -1,10 +1,10 @@
-import Component from './base-component';
-import ProductItem, { EventListener } from './product-item';
+import Component from './Component';
+import ProductItem, { EventListener } from './ProductItem';
 import { SortFilters, Filters } from '../utils/filters';
-import ProductCart from './product-cart';
+import ProductCart from './ProductCart';
 import { Product } from '../models/product';
 import products from '../db/products';
-import './product-list.scss';
+import './ProductList.scss';
 
 export default class ProductsList
   extends Component<HTMLDivElement, HTMLElement> {

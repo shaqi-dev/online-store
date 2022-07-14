@@ -1,6 +1,6 @@
-import Component from './base-component';
+import Component from './Component';
 
-export default class FilterCheckbox
+export default class CheckboxFilter
   extends Component<HTMLDivElement, HTMLLabelElement> {
   private label: string;
 

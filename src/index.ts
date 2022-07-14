@@ -1,7 +1,7 @@
-import ProductsList from './components/product-list';
-import ProductFilters from './components/product-filters';
-import ProductCart from './components/product-cart';
-import { EventListener } from './components/product-item';
+import ProductsList from './components/ProductList';
+import ProductFilters from './components/ProductFilters';
+import ProductCart from './components/ProductCart';
+import { EventListener } from './components/ProductItem';
 import './scss/style.scss';
 import './index.scss';
 

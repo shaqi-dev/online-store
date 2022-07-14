@@ -1,6 +1,6 @@
-import Component from './base-component';
-import CategoryItem from './category-item';
-import './category-list.scss';
+import Component from './Component';
+import CategoryItem from './CategoryItem';
+import './CategoryList.scss';
 
 export default class CategoryList
   extends Component<HTMLElement, HTMLUListElement> {

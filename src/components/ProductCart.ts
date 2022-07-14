@@ -1,5 +1,5 @@
 import Stateful from '../models/stateful';
-import './product-cart.scss';
+import './ProductCart.scss';
 
 const initialState: string[] = [];
 

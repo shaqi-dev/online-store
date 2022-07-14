@@ -1,6 +1,6 @@
 import { Product } from '../models/product';
-import Component from './base-component';
-import './product-item.scss';
+import Component from './Component';
+import './ProductItem.scss';
 
 export type EventListener = [string, (e: Event) => void];
 export default class ProductItem

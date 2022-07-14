@@ -1,5 +1,5 @@
-import Component from './base-component';
-import './category-item.scss';
+import Component from './Component';
+import './CategoryItem.scss';
 
 export default class CategoryItem
   extends Component<HTMLUListElement, HTMLLIElement> {

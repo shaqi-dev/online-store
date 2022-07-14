@@ -6,10 +6,10 @@ import { SortFilters, Filters, initialState } from '../utils/filters';
 import {
   categories, brands, colors, capacities, releaseDates, quantities,
 } from '../db/productsService';
-import CategoryList from './category-list';
-import FilterCheckbox from './filter-checkbox';
-import ProductsList from './product-list';
-import './product-filters.scss';
+import CategoryList from './CategoryList';
+import CheckboxFilter from './CheckboxFilter';
+import ProductsList from './ProductList';
+import './ProductFilters.scss';
 
 export default class ProductFilters extends Stateful<Filters> {
   private productsList: ProductsList;
@@ -85,7 +85,6 @@ export default class ProductFilters extends Stateful<Filters> {
     releaseDateSlider.noUiSlider?.on('change', (values) => this.setReleaseDateFilter(releaseDateStart, releaseDateEnd, values as [number, number]));
   }
 
-  // eslint-disable-next-line class-methods-use-this
   private attachSearchFilter() {
     const input = document.getElementById('search-filter') as HTMLInputElement;
     const callback = (e: Event) => this.setSearchFilter(e);
@@ -98,13 +97,13 @@ export default class ProductFilters extends Stateful<Filters> {
   }
 
   private attachChekboxFilters() {
-    this.brands.forEach((brand) => new FilterCheckbox('.brand-filter', brand, 'brand-filter')
+    this.brands.forEach((brand) => new CheckboxFilter('.brand-filter', brand, 'brand-filter')
       .element.addEventListener('change', this.setBrandFilter.bind(this)));
-    this.colors.forEach((color) => new FilterCheckbox('.color-filter', color, 'color-filter')
+    this.colors.forEach((color) => new CheckboxFilter('.color-filter', color, 'color-filter')
       .element.addEventListener('change', this.setColorFilter.bind(this)));
-    this.capacities.forEach((capacity) => new FilterCheckbox('.capacity-filter', `${capacity}GB`, 'capacity-filter')
+    this.capacities.forEach((capacity) => new CheckboxFilter('.capacity-filter', `${capacity}GB`, 'capacity-filter')
       .element.addEventListener('change', this.setCapacityFilter.bind(this)));
-    const popular = new FilterCheckbox('.other-filter', 'popular', 'popular-filter');
+    const popular = new CheckboxFilter('.other-filter', 'popular', 'popular-filter');
     popular.element.addEventListener('change', this.setPopularFilter.bind(this));
   }
 
@@ -136,8 +135,6 @@ export default class ProductFilters extends Stateful<Filters> {
     } else {
       this.state.releaseDate = [];
     }
-
-    console.log(this.state.releaseDate);
 
     this.productsList.useFilters(this.state);
   }
