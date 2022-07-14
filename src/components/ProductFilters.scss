@@ -20,6 +20,26 @@
   gap: 10px;
 }
 
+.noUi-target {
+  padding: 0 16px;
+}
+
+.noUi-handle {
+  cursor: pointer;
+}
+
+.noUi-connects {
+  cursor: pointer;
+}
+
+.noUi-connect {
+  transition: 80ms background ease-in-out;
+  background: #617fa7;
+  &--unused {
+    background: #f4f4f4;
+  }
+}
+
 .filter__title {
   font-weight: bold;
 }
@@ -33,7 +53,19 @@
   font-size: 1.6rem;
 }
 
+.filter-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .filter-checkbox__text-label {
+  cursor: pointer;
+}
+
+.filter-checkbox__input {
+  height: 16px;
+  width: 16px;
   cursor: pointer;
 }
 

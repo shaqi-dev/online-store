@@ -79,8 +79,10 @@ export default class ProductFilters extends Stateful<Filters> {
   private attachRangeFilters() {
     const quantityMin = this.quantities[0];
     const quantityMax = this.quantities[this.quantities.length - 1];
+    const quantityDefault = [quantityMin, quantityMax];
     const releaseDateStart = Date.parse(this.releaseDates[0]);
     const releaseDateEnd = Date.parse(this.releaseDates[this.releaseDates.length - 1]);
+    const releaseDateDefault = [releaseDateStart, releaseDateEnd];
     const quantityValues = [
       document.getElementById('quantity-filter__value-min'),
       document.getElementById('quantity-filter__value-max'),
@@ -102,8 +104,13 @@ export default class ProductFilters extends Stateful<Filters> {
       range: { min: releaseDateStart, max: releaseDateEnd },
     });
 
+    const connectElQuantity = this.quantitySlider.querySelector('.noUi-connect') as HTMLDivElement;
+    const connectElReleaseDate = this.releaseDateSlider.querySelector('.noUi-connect') as HTMLDivElement;
+
     if (this.state.quantity.length === 2) {
       this.quantitySlider.noUiSlider?.set([...this.state.quantity]);
+    } else {
+      connectElQuantity.classList.add('noUi-connect--unused');
     }
 
     if (this.state.releaseDate.length === 2) {
@@ -111,11 +118,20 @@ export default class ProductFilters extends Stateful<Filters> {
         Date.parse(this.state.releaseDate[0]),
         Date.parse(this.state.releaseDate[1]),
       ]);
+    } else {
+      connectElReleaseDate.classList.add('noUi-connect--unused');
     }
 
     this.quantitySlider.noUiSlider?.on('update', (values, handle) => {
       const element = quantityValues[handle] as HTMLSpanElement;
       element.innerHTML = Math.floor(+values[handle]).toString();
+
+      const modifiedValues = [Math.floor(+values[0]), Math.floor(+values[1])];
+      if (_.isEqual(quantityDefault, modifiedValues) && !connectElQuantity.classList.contains('noUi-connect--unused')) {
+        connectElQuantity.classList.add('noUi-connect--unused');
+      } else if (!_.isEqual(quantityDefault, modifiedValues) && connectElQuantity.classList.contains('noUi-connect--unused')) {
+        connectElQuantity.classList.remove('noUi-connect--unused');
+      }
     });
 
     this.quantitySlider.noUiSlider?.on(
@@ -131,6 +147,13 @@ export default class ProductFilters extends Stateful<Filters> {
       const element = releaseDateValues[handle] as HTMLSpanElement;
       const date = new Date(parseInt(`${values[handle]}`, 10));
       element.innerHTML = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+      const modifiedValues = [parseInt(`${values[0]}`, 10), parseInt(`${values[1]}`, 10)];
+      if (_.isEqual(releaseDateDefault, modifiedValues) && !connectElReleaseDate.classList.contains('noUi-connect--unused')) {
+        connectElReleaseDate.classList.add('noUi-connect--unused');
+      } else if (!_.isEqual(releaseDateDefault, modifiedValues) && connectElReleaseDate.classList.contains('noUi-connect--unused')) {
+        connectElReleaseDate.classList.remove('noUi-connect--unused');
+      }
     });
 
     this.releaseDateSlider.noUiSlider?.on(
