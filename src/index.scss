@@ -92,3 +92,25 @@ body {
 .footer .rsschool-logo {
   height: 4.8rem;
 }
+
+.userboard {
+  display: flex;
+  gap: 30px;
+  align-items: flex-end;
+}
+
+.button {
+  height: fit-content;
+  padding: 10px 15px;
+  background-color: transparent;
+  border-radius: 9px;
+  border: $color-accent-primary 3px solid;
+  font-weight: bold;
+  font-size: 1.6rem;
+  cursor: pointer;
+  transition: 80ms all ease-in-out;
+  &:hover {
+    border-color: $color-accent-hover;
+    color: $color-accent-primary;
+  }
+}
