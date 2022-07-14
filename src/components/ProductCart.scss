@@ -1,14 +1,14 @@
 @use '../scss/variables' as *;
 
-.cart {
+.userboard {
   position: relative;
 }
 
-.cart__icon {
+.cart-icon {
   height: 44px;
 }
 
-.cart__counter {
+.cart-counter {
   width: 21px;
   position: absolute;
   text-align: center;

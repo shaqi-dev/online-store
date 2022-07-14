@@ -26,10 +26,15 @@ export default class ProductCart<T extends HTMLElement> extends Stateful<string[
     this.cartElement = cart;
 
     const counter = document.createElement('div');
-    counter.classList.add('cart__counter');
+    counter.classList.add('cart-counter');
     this.counterElement = counter;
     this.cartElement.append(counter);
 
+    this.updateCounter();
+  }
+
+  public resetSettings() {
+    this.state = [];
     this.updateCounter();
   }
 

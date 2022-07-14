@@ -11,11 +11,14 @@
 			<div class="container">
 				<h1>Online-Store</h1>
 				<nav class="nav"></nav>
-				<div class="cart">
+				<div class="userboard">
+					<button type="reset" class="button userboard__reset-button">
+						Reset Settings
+					</button>
 					<img
 						src="./assets/svg/shopping-bag-icon.svg"
 						alt="Shopping bag"
-						class="cart__icon"
+						class="cart-icon"
 					/>
 				</div>
 			</div>
@@ -25,7 +28,7 @@
 				<div class="main__header">
 					<div class="main__filter">
 						<span>Search: </span>
-						<input type="text" id="search-filter">
+						<input type="text" id="search-filter" />
 					</div>
 					<div class="main__filter">
 						<span>Sort by: </span>
@@ -44,18 +47,30 @@
 							<span class="filter__title">Quantity</span>
 							<div id="quantity-filter__slider"></div>
 							<div class="filter__values">
-								<span id="quantity-filter__value-min" class="filter__value"></span>
+								<span
+									id="quantity-filter__value-min"
+									class="filter__value"
+								></span>
 								–
-								<span id="quantity-filter__value-max" class="filter__value"></span>
+								<span
+									id="quantity-filter__value-max"
+									class="filter__value"
+								></span>
 							</div>
 						</div>
 						<div class="filter release-date-filter">
 							<span class="filter__title">Release date</span>
 							<div id="release-date-filter__slider"></div>
 							<div class="filter__values">
-								<span id="release-date-filter__value-start" class="filter__value"></span>
+								<span
+									id="release-date-filter__value-start"
+									class="filter__value"
+								></span>
 								–
-								<span id="release-date-filter__value-end" class="filter__value"></span>
+								<span
+									id="release-date-filter__value-end"
+									class="filter__value"
+								></span>
 							</div>
 						</div>
 						<div class="filter brand-filter">
@@ -70,7 +85,9 @@
 						<div class="filter other-filter">
 							<span class="filter__title">Other</span>
 						</div>
-						<button type="reset" class="button product-filters__reset-button">Reset filters</button>
+						<button type="reset" class="button product-filters__reset-button">
+							Reset filters
+						</button>
 					</aside>
 				</div>
 			</div>
@@ -96,7 +113,7 @@
 
 		<template id="filter-checkbox">
 			<label for="" class="filter-checkbox">
-				<input type="checkbox" id="" class="filter-checkbox__input">
+				<input type="checkbox" id="" class="filter-checkbox__input" />
 				<span class="filter-checkbox__text-label"></span>
 			</label>
 		</template>

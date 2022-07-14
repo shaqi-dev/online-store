@@ -30,6 +30,12 @@ export default class ProductFilters extends Stateful<Filters> {
 
   private releaseDateSlider: noUiSlider.target;
 
+  private searchInput: HTMLInputElement;
+
+  private checkboxInputs: NodeListOf<HTMLInputElement>;
+
+  private sortInput: HTMLSelectElement;
+
   public constructor(productList: ProductsList) {
     const filters = localStorage.getItem('productFilters');
     super(filters ? JSON.parse(filters) : initialState);
@@ -37,8 +43,23 @@ export default class ProductFilters extends Stateful<Filters> {
 
     this.quantitySlider = document.getElementById('quantity-filter__slider') as noUiSlider.target;
     this.releaseDateSlider = document.getElementById('release-date-filter__slider') as noUiSlider.target;
+    this.searchInput = document.getElementById('search-filter') as HTMLInputElement;
+    this.sortInput = document.getElementById('sort-filter') as HTMLSelectElement;
 
     this.renderContent();
+
+    this.checkboxInputs = document.querySelectorAll('.filter-checkbox__input') as NodeListOf<HTMLInputElement>;
+  }
+
+  public resetSettings() {
+    this.state = JSON.parse(JSON.stringify(initialState));
+
+    this.resetCheckboxFilters();
+    this.resetRangeFilters();
+    this.searchInput.value = '';
+    this.sortInput.value = 'DEFAULT';
+
+    this.productsList.useFilters(this.state);
   }
 
   private renderContent() {
@@ -123,16 +144,14 @@ export default class ProductFilters extends Stateful<Filters> {
   }
 
   private attachSearchFilter() {
-    const input = document.getElementById('search-filter') as HTMLInputElement;
-    if (this.state.search !== '') input.value = this.state.search;
+    if (this.state.search !== '') this.searchInput.value = this.state.search;
     const callback = (e: Event) => this.setSearchFilter(e);
-    input.addEventListener('input', _.debounce(callback, 500));
+    this.searchInput.addEventListener('input', _.debounce(callback, 500));
   }
 
   private attachSortFilters() {
-    const sortInput = document.querySelector('#sort-filter') as HTMLSelectElement;
-    sortInput.value = this.state.sort;
-    sortInput.addEventListener('change', (e) => this.setSortFilter(e.target as HTMLSelectElement));
+    this.sortInput.value = this.state.sort;
+    this.sortInput.addEventListener('change', (e: Event) => this.setSortFilter(e.target as HTMLSelectElement));
   }
 
   private attachChekboxFilters() {
@@ -177,15 +196,21 @@ export default class ProductFilters extends Stateful<Filters> {
       search: this.state.search,
     };
 
-    const checkboxInputs = document.querySelectorAll('.filter-checkbox__input') as NodeListOf<HTMLInputElement>;
-    for (let i = 0; i < checkboxInputs.length; i += 1) {
-      checkboxInputs[i].checked = false;
-    }
-
-    this.quantitySlider.noUiSlider?.reset();
-    this.releaseDateSlider.noUiSlider?.reset();
+    this.resetCheckboxFilters();
+    this.resetRangeFilters();
 
     this.productsList.useFilters(this.state);
+  }
+
+  private resetRangeFilters() {
+    this.quantitySlider.noUiSlider?.reset();
+    this.releaseDateSlider.noUiSlider?.reset();
+  }
+
+  private resetCheckboxFilters() {
+    for (let i = 0; i < this.checkboxInputs.length; i += 1) {
+      this.checkboxInputs[i].checked = false;
+    }
   }
 
   private setSearchFilter(e: Event) {
