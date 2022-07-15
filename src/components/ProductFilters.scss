@@ -39,7 +39,7 @@
     }
 
     .checkbox-filters {
-      max-height: 170px;
+      max-height: 95px;
       flex-direction: row;
       gap: 40px;
     }
@@ -117,13 +117,15 @@
 .search-filter {
   flex-grow: 1;
   padding: 10px 15px;
-  border: $color-text-disabled 1px solid;
+  border: none;
   border-radius: 9px;
+  -webkit-box-shadow: 0px 5px 15px -10px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0px 5px 15px -10px rgba(34, 60, 80, 0.2);
+  box-shadow: 0px 5px 15px -10px rgba(34, 60, 80, 0.2);
   &:hover:not(:focus) {
-    border: $color-accent-hover 1px solid;
+    outline: $color-accent-hover 1px solid;
   }
   &:focus {
-    border: $color-accent-primary 1px solid;
     outline: $color-accent-primary 2px solid;
   }
 }
@@ -137,14 +139,16 @@
 .sort-filter {
   flex-grow: 1;
   padding: 10px 15px;
-  border: $color-text-disabled 1px solid;
+  border: none;
   border-radius: 9px;
   cursor: pointer;
+  -webkit-box-shadow: 0px 5px 15px -10px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0px 5px 15px -10px rgba(34, 60, 80, 0.2);
+  box-shadow: 0px 5px 15px -10px rgba(34, 60, 80, 0.2);
   &:hover:not(:focus) {
-    border: $color-accent-hover 1px solid;
+    outline: $color-accent-hover 1px solid;
   }
   &:focus {
-    border: $color-accent-primary 1px solid;
     outline: $color-accent-primary 2px solid;
   }
 }
