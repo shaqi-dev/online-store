@@ -29,12 +29,16 @@ export default class ProductsList
 
   public renderContent() {
     this.element.innerHTML = '';
-    this.products.forEach((product) => new ProductItem(
-      '.products',
-      product,
-      this.productCart.state.includes(product.id),
-      this.listeners,
-    ));
+    if (this.products.length > 0) {
+      this.products.forEach((product) => new ProductItem(
+        '.products',
+        product,
+        this.productCart.state.includes(product.id),
+        this.listeners,
+      ));
+    } else {
+      this.element.innerHTML = '<span class="products__error-message">Sorry, no matches were found.</span>';
+    }
   }
 
   public useFilters(filters: Filters) {
