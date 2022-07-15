@@ -1,7 +1,16 @@
 .products {
   height: 100%;
-  min-width: 950px;
+  width: 950px;
   display: flex;
   flex-wrap: wrap;
-  gap: 40px;
+  gap: 20px;
+
+  @media (max-width: 1359px) {
+    width: 620px;
+  }
+
+  @media (max-width: 1029px) {
+    max-width: 950px;
+    width: auto;
+  }
 }

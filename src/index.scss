@@ -2,7 +2,7 @@
 
 body {
   display: flex;
-  gap: 80px;
+  gap: 60px;
   flex-direction: column;
   align-items: center;
 }
@@ -14,23 +14,59 @@ body {
   -webkit-box-shadow: 0px 5px 15px -10px rgba(34, 60, 80, 0.2);
   -moz-box-shadow: 0px 5px 15px -10px rgba(34, 60, 80, 0.2);
   box-shadow: 0px 5px 15px -10px rgba(34, 60, 80, 0.2);
+
+  @media (max-width: 1029px) {
+    height: 80px;
+  }
+}
+
+.header__logo {
+  color: $color-text-primary;
+  text-decoration: none;
+
+  @media (max-width: 1029px) {
+    font-size: 1.2rem;
+  }
+
+  @media (max-width: 819px) {
+    width: 60px;
+  }
 }
 
 .header .nav {
   padding-top: 12px;
+
+  @media (max-width: 1029px) {
+    padding-top: 6px;
+  }
 }
 
 .header .container {
   width: 1280px;
+  height: 100%;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 20px;
+
+  @media (max-width: 1359px) {
+    max-width: 950px;
+  }
+
+  @media (max-width: 1029px) {
+    width: 100%;
+    padding: 0 20px;
+    gap: 10px;
+  }
 }
 
 .main {
   flex-grow: 1;
+  @media (max-width: 1029px) {
+    width: 100%;
+    padding: 0 20px;
+  }
 }
 
 .main .container {
@@ -38,6 +74,14 @@ body {
   flex-direction: column;
   max-width: 1280px;
   gap: 40px;
+
+  @media (max-width: 1359px) {
+    max-width: 950px;
+  }
+
+  @media (max-width: 1029px) {
+    max-width: 100%;
+  }
 }
 
 .main__header {
@@ -49,6 +93,10 @@ body {
 .main__body {
   display: flex;
   gap: 40px;
+
+  @media (max-width: 1029px) {
+    flex-direction: column;
+  }
 }
 
 .link-button {
@@ -72,15 +120,27 @@ body {
   -webkit-box-shadow: 0px 5px 15px -10px rgba(34, 60, 80, 0.2);
   -moz-box-shadow: 0px 5px 15px -10px rgba(34, 60, 80, 0.2);
   box-shadow: 0px 5px 15px -10px rgba(34, 60, 80, 0.2);
+
+  @media (max-width: 1029px) {
+    height: 80px;
+  }
 }
 
 .footer .container {
-  width: 1280px;
+  max-width: 1280px;
   height: 100%;
   margin: 0 auto;
   display: flex;
   justify-content: center;
   gap: 20px;
+
+  @media (max-width: 1359px) {
+    max-width: 950px;
+  }
+
+  @media (max-width: 1029px) {
+    max-width: 620px;
+  }
 }
 
 .footer__info {
@@ -106,6 +166,10 @@ body {
   display: flex;
   gap: 30px;
   align-items: flex-end;
+
+  @media (max-width: 1029px) {
+    gap: 20px;
+  }
 }
 
 .button {

@@ -4,6 +4,10 @@
 
 html {
   font-size: 10px;
+
+  @media (max-width: 1029px) {
+    font-size: 9px;
+  }
 }
 
 body {

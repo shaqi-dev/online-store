@@ -12,6 +12,49 @@
   -webkit-box-shadow: 0px 5px 15px -10px rgba(34, 60, 80, 0.2);
   -moz-box-shadow: 0px 5px 15px -10px rgba(34, 60, 80, 0.2);
   box-shadow: 0px 5px 15px -10px rgba(34, 60, 80, 0.2);
+
+  .filter__items {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  @media (max-width: 1029px) {
+    max-width: 950px;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+
+    .range-filters {
+      width: 60vw;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .filter__values {
+      width: 30vw;
+      align-self: center;
+    }
+
+    .checkbox-filters {
+      max-height: 170px;
+      flex-direction: row;
+      gap: 40px;
+    }
+
+    .filter__items {
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+  }
+}
+
+.checkbox-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .filter {
@@ -54,6 +97,7 @@
 }
 
 .filter-checkbox {
+  width: fit-content;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -61,6 +105,7 @@
 
 .filter-checkbox__text-label {
   cursor: pointer;
+  padding-right: 10px;
 }
 
 .filter-checkbox__input {

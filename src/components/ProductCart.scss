@@ -6,6 +6,11 @@
 
 .cart-icon {
   height: 54.5px;
+
+  @media (max-width: 1029px) {
+    align-self: center;
+    height: 44px;
+  }
 }
 
 .cart-counter {
@@ -17,4 +22,9 @@
   right: 14px;
   color: #000000;
   font-weight: bold;
+
+  @media (max-width: 1029px) {
+    top: 16px;
+    right: 9px;
+  }
 }

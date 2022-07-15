@@ -179,27 +179,27 @@ export default class ProductFilters extends Stateful<Filters> {
 
   private attachChekboxFilters() {
     this.brands.forEach((brand) => new CheckboxFilter(
-      '.brand-filter',
+      '.brand-filter .filter__items',
       brand,
       'brand-filter',
       this.state.brand.includes(brand),
     ).element.addEventListener('change', this.setBrandFilter.bind(this)));
 
     this.colors.forEach((color) => new CheckboxFilter(
-      '.color-filter',
+      '.color-filter .filter__items',
       color,
       'color-filter',
       this.state.color.includes(color),
     ).element.addEventListener('change', this.setColorFilter.bind(this)));
 
     this.capacities.forEach((capacity) => new CheckboxFilter(
-      '.capacity-filter',
+      '.capacity-filter .filter__items',
       `${capacity}GB`,
       'capacity-filter',
       this.state.capacity.includes(capacity),
     ).element.addEventListener('change', this.setCapacityFilter.bind(this)));
 
-    (new CheckboxFilter('.other-filter', 'Popular', 'popular-filter', this.state.popular)
+    (new CheckboxFilter('.other-filter .filter__items', 'Popular', 'popular-filter', this.state.popular)
       .element.addEventListener('change', this.setPopularFilter.bind(this)));
   }
 

@@ -9,7 +9,7 @@
 	<body>
 		<header class="header">
 			<div class="container">
-				<h1>Online-Store</h1>
+				<a href="#" class="header__logo"><h1>Online-Store</h1></a>
 				<nav class="nav"></nav>
 				<div class="userboard">
 					<button type="reset" class="button userboard__reset-button">
@@ -40,47 +40,55 @@
 				</div>
 				<div class="main__body">
 					<aside class="product-filters">
-						<div class="filter quantity-filter">
-							<span class="filter__title">Quantity</span>
-							<div id="quantity-filter__slider"></div>
-							<div class="filter__values">
-								<span
-									id="quantity-filter__value-min"
-									class="filter__value"
-								></span>
-								–
-								<span
-									id="quantity-filter__value-max"
-									class="filter__value"
-								></span>
+						<div class="range-filters">
+							<div class="filter quantity-filter">
+								<span class="filter__title">Quantity</span>
+								<div id="quantity-filter__slider"></div>
+								<div class="filter__values">
+									<span
+										id="quantity-filter__value-min"
+										class="filter__value"
+									></span>
+									–
+									<span
+										id="quantity-filter__value-max"
+										class="filter__value"
+									></span>
+								</div>
+							</div>
+							<div class="filter release-date-filter">
+								<span class="filter__title">Release date</span>
+								<div id="release-date-filter__slider"></div>
+								<div class="filter__values">
+									<span
+										id="release-date-filter__value-start"
+										class="filter__value"
+									></span>
+									–
+									<span
+										id="release-date-filter__value-end"
+										class="filter__value"
+									></span>
+								</div>
 							</div>
 						</div>
-						<div class="filter release-date-filter">
-							<span class="filter__title">Release date</span>
-							<div id="release-date-filter__slider"></div>
-							<div class="filter__values">
-								<span
-									id="release-date-filter__value-start"
-									class="filter__value"
-								></span>
-								–
-								<span
-									id="release-date-filter__value-end"
-									class="filter__value"
-								></span>
+						<div class="checkbox-filters">
+							<div class="filter brand-filter">
+								<span class="filter__title">Brand</span>
+								<div class="filter__items"></div>
 							</div>
-						</div>
-						<div class="filter brand-filter">
-							<span class="filter__title">Brand</span>
-						</div>
-						<div class="filter color-filter">
-							<span class="filter__title">Color</span>
-						</div>
-						<div class="filter capacity-filter">
-							<span class="filter__title">Capacity</span>
-						</div>
-						<div class="filter other-filter">
-							<span class="filter__title">Other</span>
+							<div class="filter color-filter">
+								<span class="filter__title">Color</span>
+								<div class="filter__items"></div>
+							</div>
+							<div class="filter capacity-filter">
+								<span class="filter__title">Capacity</span>
+								<div class="filter__items"></div>
+							</div>
+							<div class="filter other-filter">
+								<span class="filter__title">Other</span>
+								<div class="filter__items"></div>
+							</div>
 						</div>
 						<button type="reset" class="button product-filters__reset-button">
 							Reset filters
@@ -132,16 +140,18 @@
 				<div class="product__img">
 					<img src="" alt="Product" />
 				</div>
-				<h3 class="product__title"></h3>
-				<div class="product__body">
-					<span class="product__release"></span>
-					<span class="product__in-stock"></span>
-				</div>
-				<div class="product__footer">
-					<span class="product__price"></span>
-					<button type="button" class="link-button link-button--add-to-cart">
-						Add to cart
-					</button>
+				<div class="product__main">
+					<h3 class="product__title"></h3>
+					<div class="product__description">
+						<span class="product__release"></span>
+						<span class="product__in-stock"></span>
+					</div>
+					<div class="product__footer">
+						<span class="product__price"></span>
+						<button type="button" class="link-button link-button--add-to-cart">
+							Add to cart
+						</button>
+					</div>
 				</div>
 			</div>
 		</template>
