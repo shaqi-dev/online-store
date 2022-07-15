@@ -1,5 +1,7 @@
+import Toastify from 'toastify-js';
 import Stateful from '../models/stateful';
 import './ProductCart.scss';
+import 'toastify-js/src/toastify.css';
 
 const initialState: string[] = [];
 
@@ -46,6 +48,7 @@ export default class ProductCart<T extends HTMLElement> extends Stateful<string[
     }
 
     if (target.classList.contains('product--not-in-stock')) return;
+    if (!this.state.includes(target.id) && this.checkOnMaxCount(20)) return;
 
     const addToCartBtn = target.querySelector('.link-button--add-to-cart') as HTMLButtonElement;
 
@@ -58,6 +61,27 @@ export default class ProductCart<T extends HTMLElement> extends Stateful<string[
       target.classList.remove('product--in-cart');
       addToCartBtn.innerText = 'Add to cart';
     }
+  }
+
+  private checkOnMaxCount(max: number) {
+    if (this.state.length === max) {
+      Toastify({
+        text: 'Sorry, your cart is full',
+        duration: 4000,
+        newWindow: true,
+        close: true,
+        gravity: 'bottom',
+        position: 'right',
+        stopOnFocus: true,
+        style: {
+          background: 'linear-gradient(90deg, rgba(97,57,57,1) 0%, rgba(226,65,65,1) 100%)',
+          borderRadius: '9px',
+        },
+      }).showToast();
+
+      return true;
+    }
+    return false;
   }
 
   private updateCounter() {
