@@ -23,9 +23,8 @@ export default class ProductCart<T extends HTMLElement> extends Stateful<string[
   public constructor(cartSelector: string) {
     const savedState = localStorage.getItem('productCart');
     super(savedState ? JSON.parse(savedState) : initialState);
-
-    const cart = document.querySelector(cartSelector) as T;
-    this.cartElement = cart;
+    
+    this.cartElement = document.querySelector(cartSelector) as T;
 
     const counter = document.createElement('div');
     counter.classList.add('cart-counter');

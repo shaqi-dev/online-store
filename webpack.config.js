@@ -9,7 +9,7 @@ const baseConfig = {
   mode: 'development',
   entry: path.resolve(__dirname, 'src', 'index.ts'),
   output: {
-    filename: 'bundle-[hash].js',
+    filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
   },
   resolve: {
@@ -59,14 +59,13 @@ const baseConfig = {
       },
     }),
     new MiniCssExtractPlugin({
-      filename: 'style-[hash].css',
+      filename: 'style.css',
     }),
   ],
 };
 
 module.exports = ({ mode }) => {
   const isProductionMode = mode === 'prod';
-  // eslint-disable-next-line global-require
   const envConfig = isProductionMode ? require('./webpack.config.prod') : require('./webpack.config.dev');
 
   return merge(baseConfig, envConfig);

@@ -6,7 +6,7 @@ import { Product } from '../models/product';
 import products from '../db/products';
 import './ProductList.scss';
 
-export default class ProductsList
+export default class ProductList
   extends Component<HTMLDivElement, HTMLElement> {
   private products: Product[];
 
