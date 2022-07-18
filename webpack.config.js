@@ -41,11 +41,6 @@ const baseConfig = {
           to: path.resolve(__dirname, 'dist', 'assets'),
           noErrorOnMissing: true,
         },
-        {
-          from: path.resolve(__dirname, 'src', 'db'),
-          to: path.resolve(__dirname, 'dist', 'db'),
-          noErrorOnMissing: true,
-        },
       ],
     }),
     new HtmlWebpackPlugin({
