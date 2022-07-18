@@ -1,11 +1,10 @@
 const path = require('path');
-const { merge } = require('webpack-merge');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const baseConfig = {
+module.exports = {
   mode: 'development',
   entry: path.resolve(__dirname, 'src', 'index.ts'),
   output: {
@@ -57,11 +56,4 @@ const baseConfig = {
       filename: 'style.css',
     }),
   ],
-};
-
-module.exports = ({ mode }) => {
-  const isProductionMode = mode === 'prod';
-  const envConfig = isProductionMode ? require('./webpack.config.prod') : require('./webpack.config.dev');
-
-  return merge(baseConfig, envConfig);
 };
