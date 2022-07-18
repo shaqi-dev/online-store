@@ -44,6 +44,7 @@ export default class ProductFilters extends Stateful<Filters> {
     this.quantitySlider = document.getElementById('quantity-filter__slider') as noUiSlider.target;
     this.releaseDateSlider = document.getElementById('release-date-filter__slider') as noUiSlider.target;
     this.searchInput = document.getElementById('search-filter') as HTMLInputElement;
+    this.searchInput.focus();
     this.sortInput = document.getElementById('sort-filter') as HTMLSelectElement;
 
     this.renderContent();
