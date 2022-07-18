@@ -36,7 +36,7 @@ export default class ProductFilters extends Stateful<Filters> {
 
   private sortInput: HTMLSelectElement;
 
-  public constructor(productList: ProductsList) {
+  constructor(productList: ProductsList) {
     const filters = localStorage.getItem('productFilters');
     super(filters ? JSON.parse(filters) : initialState);
     this.productsList = productList;
@@ -52,7 +52,7 @@ export default class ProductFilters extends Stateful<Filters> {
     this.checkboxInputs = document.querySelectorAll('.filter-checkbox__input') as NodeListOf<HTMLInputElement>;
   }
 
-  public resetSettings() {
+  public resetSettings(): void {
     this.state = JSON.parse(JSON.stringify(initialState));
 
     this.resetCheckboxFilters();
@@ -63,7 +63,7 @@ export default class ProductFilters extends Stateful<Filters> {
     this.productsList.useFilters(this.state);
   }
 
-  private renderContent() {
+  private renderContent(): void {
     this.attachCategoryFilters();
     this.attachRangeFilters();
     this.attachChekboxFilters();
@@ -72,12 +72,12 @@ export default class ProductFilters extends Stateful<Filters> {
     this.attachResetFilters();
   }
 
-  private attachResetFilters() {
+  private attachResetFilters(): void {
     const resetBtn = document.querySelector('.product-filters__reset-button') as HTMLButtonElement;
     resetBtn.addEventListener('click', () => this.resetFilters());
   }
 
-  private attachRangeFilters() {
+  private attachRangeFilters(): void {
     const quantityMin = this.quantities[0];
     const quantityMax = this.quantities[this.quantities.length - 1];
     const quantityDefault = [quantityMin, quantityMax];
@@ -167,18 +167,18 @@ export default class ProductFilters extends Stateful<Filters> {
     );
   }
 
-  private attachSearchFilter() {
+  private attachSearchFilter(): void {
     if (this.state.search !== '') this.searchInput.value = this.state.search;
-    const callback = (e: Event) => this.setSearchFilter(e);
+    const callback = (e: Event): void => this.setSearchFilter(e);
     this.searchInput.addEventListener('input', _.debounce(callback, 500));
   }
 
-  private attachSortFilters() {
+  private attachSortFilters(): void {
     this.sortInput.value = this.state.sort;
     this.sortInput.addEventListener('change', (e: Event) => this.setSortFilter(e.target as HTMLSelectElement));
   }
 
-  private attachChekboxFilters() {
+  private attachChekboxFilters(): void {
     this.brands.forEach((brand) => new CheckboxFilter(
       '.brand-filter .filter__items',
       brand,
@@ -204,7 +204,7 @@ export default class ProductFilters extends Stateful<Filters> {
       .element.addEventListener('change', this.setPopularFilter.bind(this)));
   }
 
-  private attachCategoryFilters() {
+  private attachCategoryFilters(): void {
     const categoryList = new CategoryList(this.categories, this.state.category);
     categoryList.elements.forEach((button) => button.addEventListener(
       'click',
@@ -212,7 +212,7 @@ export default class ProductFilters extends Stateful<Filters> {
     ));
   }
 
-  private resetFilters() {
+  private resetFilters(): void {
     this.state = {
       ...JSON.parse(JSON.stringify(initialState)),
       category: this.state.category,
@@ -226,18 +226,18 @@ export default class ProductFilters extends Stateful<Filters> {
     this.productsList.useFilters(this.state);
   }
 
-  private resetRangeFilters() {
+  private resetRangeFilters(): void {
     this.quantitySlider.noUiSlider?.reset();
     this.releaseDateSlider.noUiSlider?.reset();
   }
 
-  private resetCheckboxFilters() {
+  private resetCheckboxFilters(): void {
     for (let i = 0; i < this.checkboxInputs.length; i += 1) {
       this.checkboxInputs[i].checked = false;
     }
   }
 
-  private setSearchFilter(e: Event) {
+  private setSearchFilter(e: Event): void {
     const target = e.target as HTMLInputElement;
     if (target.value) {
       this.state.search = target.value;
@@ -248,7 +248,7 @@ export default class ProductFilters extends Stateful<Filters> {
     this.productsList.useFilters(this.state);
   }
 
-  private setReleaseDateFilter(min: number, max: number, values: [number, number]) {
+  private setReleaseDateFilter(min: number, max: number, values: [number, number]): void {
     const formattedStartDate = new Date(parseInt(`${values[0]}`, 10)).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
     const formattedEndDate = new Date(parseInt(`${values[1]}`, 10)).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 
@@ -261,7 +261,7 @@ export default class ProductFilters extends Stateful<Filters> {
     this.productsList.useFilters(this.state);
   }
 
-  private setQuantityFilter(start: number, end: number, values: [number, number]) {
+  private setQuantityFilter(start: number, end: number, values: [number, number]): void {
     const roundedMin = Math.floor(values[0]);
     const roundedMax = Math.floor(values[1]);
 
@@ -274,14 +274,14 @@ export default class ProductFilters extends Stateful<Filters> {
     this.productsList.useFilters(this.state);
   }
 
-  private setPopularFilter(e: Event) {
+  private setPopularFilter(e: Event): void {
     const checkbox = e.target as HTMLInputElement;
     this.state.popular = checkbox.checked;
 
     this.productsList.useFilters(this.state);
   }
 
-  private setBrandFilter(e: Event) {
+  private setBrandFilter(e: Event): void {
     const checkbox = e.target as HTMLInputElement;
     const labelEl = checkbox.parentElement?.querySelector('.filter-checkbox__text-label') as HTMLSpanElement;
     const label = labelEl.innerText.trim();
@@ -295,7 +295,7 @@ export default class ProductFilters extends Stateful<Filters> {
     this.productsList.useFilters(this.state);
   }
 
-  private setColorFilter(e: Event) {
+  private setColorFilter(e: Event): void {
     const checkbox = e.target as HTMLInputElement;
     const labelEl = checkbox.parentElement?.querySelector('.filter-checkbox__text-label') as HTMLSpanElement;
     const label = labelEl.innerText.trim();
@@ -309,7 +309,7 @@ export default class ProductFilters extends Stateful<Filters> {
     this.productsList.useFilters(this.state);
   }
 
-  private setCapacityFilter(e: Event) {
+  private setCapacityFilter(e: Event): void {
     const checkbox = e.target as HTMLInputElement;
     const labelEl = checkbox.parentElement?.querySelector('.filter-checkbox__text-label') as HTMLSpanElement;
     const label = labelEl.innerText.trim().slice(0, -2);
@@ -323,7 +323,7 @@ export default class ProductFilters extends Stateful<Filters> {
     this.productsList.useFilters(this.state);
   }
 
-  private setSortFilter(select: HTMLSelectElement) {
+  private setSortFilter(select: HTMLSelectElement): void {
     const { value } = select;
 
     this.state = {
@@ -334,7 +334,7 @@ export default class ProductFilters extends Stateful<Filters> {
     this.productsList.useFilters(this.state);
   }
 
-  private setCategoryFilter(nextActive: HTMLLIElement) {
+  private setCategoryFilter(nextActive: HTMLLIElement): void {
     const currentActive = document.querySelector('.categories__item--active') as HTMLLIElement;
     if (currentActive !== nextActive) {
       currentActive.classList.remove('categories__item--active');

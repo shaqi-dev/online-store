@@ -16,14 +16,14 @@ export default class ProductCart<T extends HTMLElement> extends Stateful<string[
     this.updateCounter();
   }
 
-  public get state() {
+  public get state(): string[] {
     return this._state;
   }
 
-  public constructor(cartSelector: string) {
+  constructor(cartSelector: string) {
     const savedState = localStorage.getItem('productCart');
     super(savedState ? JSON.parse(savedState) : initialState);
-    
+
     this.cartElement = document.querySelector(cartSelector) as T;
 
     const counter = document.createElement('div');
@@ -34,12 +34,12 @@ export default class ProductCart<T extends HTMLElement> extends Stateful<string[
     this.updateCounter();
   }
 
-  public resetSettings() {
+  public resetSettings(): void {
     this.state = [];
     this.updateCounter();
   }
 
-  public addToCart(e: Event) {
+  public addToCart(e: Event): void {
     let target = e.target as HTMLElement;
 
     while (!target.id) {
@@ -62,7 +62,7 @@ export default class ProductCart<T extends HTMLElement> extends Stateful<string[
     }
   }
 
-  private checkOnMaxCount(max: number) {
+  private checkOnMaxCount(max: number): boolean {
     if (this.state.length === max) {
       Toastify({
         text: 'Sorry, your cart is full',
@@ -83,7 +83,7 @@ export default class ProductCart<T extends HTMLElement> extends Stateful<string[
     return false;
   }
 
-  private updateCounter() {
+  private updateCounter(): void {
     if (this._state.length > 0) {
       this.counterElement.innerText = `${this._state.length}`;
       this.counterElement.style.display = 'block';

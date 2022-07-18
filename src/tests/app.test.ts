@@ -1,3 +1,5 @@
+/* eslint-disable import/first */
+/* eslint-disable import/newline-after-import */
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 import { TextDecoder, TextEncoder } from 'util';
@@ -5,7 +7,9 @@ global.TextEncoder = TextEncoder as typeof globalThis.TextEncoder;
 global.TextDecoder = TextDecoder as typeof globalThis.TextDecoder;
 import { JSDOM } from 'jsdom';
 import products from '../db/products';
-import { categories, brands, colors, capacities } from '../db/productsService';
+import {
+  categories, brands, colors, capacities,
+} from '../db/productsService';
 import App from '../components/App';
 
 describe('App', () => {
@@ -75,10 +79,14 @@ describe('App', () => {
     const categoryList = document.querySelectorAll('.categories__item') as NodeListOf<HTMLLIElement>;
     await userEvent.click(categoryList[categoryList.length - 1]);
     expect(document.querySelectorAll('.product').length)
-      .toEqual(products.filter((product) => product.category === categories[categories.length - 1]).length);
+      .toEqual(products.filter((product) => (
+        product.category === categories[categories.length - 1]
+      )).length);
     await userEvent.click(categoryList[categoryList.length - 2]);
     expect(document.querySelectorAll('.product').length)
-      .toEqual(products.filter((product) => product.category === categories[categories.length - 2]).length);
+      .toEqual(products.filter((product) => (
+        product.category === categories[categories.length - 2]
+      )).length);
     await userEvent.click(categoryList[0]);
   });
 
@@ -94,17 +102,17 @@ describe('App', () => {
     await userEvent.click(checkboxes[checkboxes.length - 1]);
     expect(document.querySelectorAll('.product').length)
       .toEqual(products.filter((product) => product.popular).length);
-    expect(checkboxes[checkboxes.length - 1].querySelector('.filter-checkbox__input')).toBeChecked;
+    expect(checkboxes[checkboxes.length - 1].querySelector('.filter-checkbox__input')).toBeChecked();
     await userEvent.click(checkboxes[checkboxes.length - 1]);
-    expect(checkboxes[checkboxes.length - 1].querySelector('.filter-checkbox__input')).not.toBeChecked;
+    expect(checkboxes[checkboxes.length - 1].querySelector('.filter-checkbox__input')).not.toBeChecked();
   });
 
   it('Search filter works', () => {
     const searchInput = document.querySelector('.search-filter') as HTMLInputElement;
     searchInput.value = 'Apple iPhone 13 128GB (Midnight)';
-    setTimeout(() => { 
+    setTimeout(() => {
       expect(document.querySelectorAll('.product').length).toEqual(1);
       searchInput.value = '';
     }, 1000);
   });
-})
+});

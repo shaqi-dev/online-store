@@ -1,12 +1,11 @@
-/* eslint-disable no-underscore-dangle */
 export default abstract class Stateful<T> {
   protected _state: T;
 
-  get state() {
+  public get state(): T {
     return this._state;
   }
 
-  set state(nextState: T) {
+  public set state(nextState: T) {
     this._state = nextState;
   }
 

@@ -12,7 +12,7 @@ export default class CategoryItem
     this.renderContent();
   }
 
-  public renderContent() {
+  protected renderContent(): void {
     this.element.innerText = [this.category[0].toUpperCase(), this.category.slice(1)].join('');
   }
 }

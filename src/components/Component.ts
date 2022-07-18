@@ -2,11 +2,11 @@ export default abstract class Component<
 T extends HTMLElement,
 U extends HTMLElement,
 > {
-  templateElement: HTMLTemplateElement;
+  private templateElement: HTMLTemplateElement;
 
-  hostElement: T;
+  private hostElement: T;
 
-  element: U;
+  public element: U;
 
   constructor(
     templateId: string,
@@ -31,12 +31,12 @@ U extends HTMLElement,
     this.attach(insertAtStart);
   }
 
-  private attach(insertAtBeginning: boolean) {
+  private attach(insertAtBeginning: boolean): void {
     this.hostElement.insertAdjacentElement(
       insertAtBeginning ? 'afterbegin' : 'beforeend',
       this.element,
     );
   }
 
-  abstract renderContent(): void;
+  protected abstract renderContent(): void;
 }

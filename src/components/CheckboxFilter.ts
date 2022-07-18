@@ -22,7 +22,7 @@ export default class CheckboxFilter
     this.renderContent();
   }
 
-  public renderContent() {
+  public renderContent(): void {
     const labelEl = this.element;
     const checkbox = this.element.querySelector('.filter-checkbox__input') as HTMLInputElement;
     const textLabel = this.element.querySelector('.filter-checkbox__text-label') as HTMLSpanElement;

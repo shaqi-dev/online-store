@@ -14,7 +14,7 @@ export default class ProductList
 
   private productCart: ProductCart<HTMLDivElement>;
 
-  public constructor(
+  constructor(
     cart: ProductCart<HTMLDivElement>,
     listeners: EventListener[] = [],
   ) {
@@ -27,7 +27,7 @@ export default class ProductList
     this.useFilters(filters ? JSON.parse(filters) : initialState);
   }
 
-  public renderContent() {
+  protected renderContent(): void {
     this.element.innerHTML = '';
     if (this.products.length > 0) {
       this.products.forEach((product) => new ProductItem(
@@ -41,7 +41,7 @@ export default class ProductList
     }
   }
 
-  public useFilters(filters: Filters) {
+  public useFilters(filters: Filters): void {
     localStorage.setItem('productFilters', JSON.stringify(filters));
 
     this.useCategoryFilter(filters);
@@ -53,7 +53,7 @@ export default class ProductList
     this.renderContent();
   }
 
-  private useSearchFilter(filters: Filters) {
+  private useSearchFilter(filters: Filters): void {
     const search = filters.search.toLowerCase();
 
     if (search !== '') {
@@ -65,7 +65,7 @@ export default class ProductList
           ? product.size.toLowerCase()
           : product.capacity.toLowerCase();
 
-        const isExist = (prop: string) => prop.indexOf(search) > -1;
+        const isExist = (prop: string): boolean => prop.indexOf(search) > -1;
 
         return isExist(brand)
           || isExist(model)
@@ -77,7 +77,7 @@ export default class ProductList
     }
   }
 
-  private useRangeFilter(filters: Filters) {
+  private useRangeFilter(filters: Filters): void {
     const { quantity, releaseDate } = filters;
 
     if (quantity.length === 2) {
@@ -97,7 +97,7 @@ export default class ProductList
     }
   }
 
-  private useCheckboxFilter(filters: Filters) {
+  private useCheckboxFilter(filters: Filters): void {
     const {
       brand, color, capacity, popular,
     } = filters;
@@ -116,7 +116,7 @@ export default class ProductList
     }
   }
 
-  private useCategoryFilter(filters: Filters) {
+  private useCategoryFilter(filters: Filters): void {
     const { category } = filters;
 
     if (category.toLowerCase() !== 'all') {
@@ -126,16 +126,16 @@ export default class ProductList
     }
   }
 
-  private useSortFilter(filters: Filters) {
+  private useSortFilter(filters: Filters): void {
     const { sort } = filters;
 
-    const sortedByName = () => this.products.sort((a, b) => {
+    const sortedByName = (): Product[] => this.products.sort((a, b) => {
       const nameA = (`${a.brand}${a.model}${a.color}`).toLowerCase();
       const nameB = (`${b.brand}${b.model}${b.color}`).toLowerCase();
       return nameA.localeCompare(nameB);
     });
 
-    const sortedByDate = () => this.products.sort((a, b) => (
+    const sortedByDate = (): Product[] => this.products.sort((a, b) => (
       Date.parse(b.releaseDate) - Date.parse(a.releaseDate)
     ));
 

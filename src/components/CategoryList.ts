@@ -19,7 +19,7 @@ export default class CategoryList
     this.renderContent();
   }
 
-  public renderContent() {
+  protected renderContent(): void {
     if (this.categories.length > 0) {
       const all = new CategoryItem('.categories', 'all');
       if (this.active === 'all') all.element.classList.add('categories__item--active');

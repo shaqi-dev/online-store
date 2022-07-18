@@ -22,7 +22,7 @@ export default class ProductItem
     this.renderContent();
   }
 
-  public renderContent() {
+  public renderContent(): void {
     const image = this.element.querySelector('.product__img img') as HTMLImageElement;
     const title = this.element.querySelector('.product__title') as HTMLHeadingElement;
     const release = this.element.querySelector('.product__release') as HTMLSpanElement;
@@ -53,7 +53,7 @@ export default class ProductItem
     this.attachListeners();
   }
 
-  private attachListeners() {
+  private attachListeners(): void {
     this.listeners.forEach((listener) => this.element.addEventListener(listener[0], listener[1]));
   }
 }
