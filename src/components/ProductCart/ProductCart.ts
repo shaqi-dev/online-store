@@ -1,5 +1,5 @@
 import Toastify from 'toastify-js';
-import Stateful from '../models/stateful';
+import Stateful from '../../models/stateful';
 import './ProductCart.scss';
 import 'toastify-js/src/toastify.css';
 

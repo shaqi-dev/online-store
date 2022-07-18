@@ -1,7 +1,7 @@
-import ProductsList from './ProductList';
-import ProductFilters from './ProductFilters';
-import ProductCart from './ProductCart';
-import { EventListener } from './ProductItem';
+import ProductsList from '../ProductList';
+import ProductFilters from '../ProductFilters';
+import ProductCart from '../ProductCart';
+import { EventListener } from '../ProductItem';
 
 export default class App {
   private productCart = new ProductCart<HTMLDivElement>('.userboard');

@@ -1,5 +1,5 @@
-import Component from './Component';
-import CategoryItem from './CategoryItem';
+import Component from '../Component';
+import CategoryItem from '../CategoryItem';
 import './CategoryList.scss';
 
 export default class CategoryList

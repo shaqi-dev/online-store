@@ -10,7 +10,7 @@ import products from '../db/products';
 import {
   categories, brands, colors, capacities,
 } from '../db/productsService';
-import App from '../components/App';
+import App from '../components/App/App';
 
 describe('App', () => {
   beforeEach(async () => {

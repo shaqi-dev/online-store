@@ -1,5 +1,5 @@
-import { Product } from '../models/product';
-import Component from './Component';
+import { Product } from '../../models/product';
+import Component from '../Component';
 import './ProductItem.scss';
 
 export type EventListener = [string, (e: Event) => void];

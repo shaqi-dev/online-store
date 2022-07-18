@@ -1,14 +1,14 @@
 import * as noUiSlider from 'nouislider';
 import 'nouislider/dist/nouislider.css';
 import _ from 'lodash';
-import Stateful from '../models/stateful';
-import { SortFilters, Filters, initialState } from '../utils/filters';
+import Stateful from '../../models/stateful';
+import { SortFilters, Filters, initialState } from '../../utils/filters';
 import {
   categories, brands, colors, capacities, releaseDates, quantities,
-} from '../db/productsService';
-import CategoryList from './CategoryList';
-import CheckboxFilter from './CheckboxFilter';
-import ProductsList from './ProductList';
+} from '../../db/productsService';
+import CategoryList from '../CategoryList';
+import CheckboxFilter from '../CheckboxFilter';
+import ProductsList from '../ProductList';
 import './ProductFilters.scss';
 
 export default class ProductFilters extends Stateful<Filters> {

@@ -1,9 +1,9 @@
-import Component from './Component';
-import ProductItem, { EventListener } from './ProductItem';
-import { SortFilters, Filters, initialState } from '../utils/filters';
-import ProductCart from './ProductCart';
-import { Product } from '../models/product';
-import products from '../db/products';
+import Component from '../Component';
+import ProductItem, { EventListener } from '../ProductItem';
+import { SortFilters, Filters, initialState } from '../../utils/filters';
+import ProductCart from '../ProductCart';
+import { Product } from '../../models/product';
+import products from '../../db/products';
 import './ProductList.scss';
 
 export default class ProductList
