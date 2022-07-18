@@ -5,7 +5,6 @@ module.exports = {
     browser: true,
     node: true,
     es6: true,
-    'jest/globals': true,
   },
   extends: [
     'airbnb-base',
@@ -28,5 +27,15 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'error',
     '@typescript-eslint/no-var-requires': 'off',
     'no-underscore-dangle': 'off',
+    '@typescript-eslint/explicit-member-accessibility': [
+      'error',
+      {
+        accessibility: 'explicit',
+        overrides: {
+          constructors: 'no-public',
+        },
+      },
+    ],
+    '@typescript-eslint/explicit-function-return-type': ['error'],
   },
 };
