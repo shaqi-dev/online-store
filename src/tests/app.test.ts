@@ -5,7 +5,7 @@ global.TextEncoder = TextEncoder as typeof globalThis.TextEncoder;
 global.TextDecoder = TextDecoder as typeof globalThis.TextDecoder;
 import { JSDOM } from 'jsdom';
 import products from '../db/products';
-import { categories } from '../db/productsService';
+import { categories, brands, colors, capacities } from '../db/productsService';
 import App from '../components/App';
 
 describe('App', () => {
@@ -85,7 +85,7 @@ describe('App', () => {
   it('Renders checkbox filters', () => {
     const checkboxes = document.querySelectorAll('.filter-checkbox') as NodeListOf<HTMLLabelElement>;
     const popularTextField = checkboxes[checkboxes.length - 1].querySelector('.filter-checkbox__text-label') as HTMLSpanElement;
-    expect(checkboxes.length).toEqual(20);
+    expect(checkboxes.length).toEqual(brands.length + colors.length + capacities.length + 1);
     expect(popularTextField.innerText).toEqual('Popular');
   });
 
