@@ -1,18 +1,18 @@
-import ProductsList from '../ProductList';
+import ProductList from '../ProductList';
 import ProductFilters from '../ProductFilters';
 import ProductCart from '../ProductCart';
 import { EventListener } from '../ProductItem';
 
 export default class App {
-  private productCart = new ProductCart<HTMLDivElement>('.userboard');
+  private productCart: ProductCart<HTMLDivElement> = new ProductCart<HTMLDivElement>('.userboard');
 
   private addToCartListener: EventListener = ['click', this.productCart.addToCart.bind(this.productCart)];
 
-  private productsList = new ProductsList(this.productCart, [this.addToCartListener]);
+  private productsList: ProductList = new ProductList(this.productCart, [this.addToCartListener]);
 
-  private productFilters = new ProductFilters(this.productsList);
+  private productFilters: ProductFilters = new ProductFilters(this.productsList);
 
-  private resetSettingsBtn = document.querySelector('.userboard__reset-button') as HTMLButtonElement;
+  private resetSettingsBtn: HTMLButtonElement = document.querySelector('.userboard__reset-button') as HTMLButtonElement;
 
   private resetSettingsHandler = (): void => {
     this.productCart.resetSettings();
