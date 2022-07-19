@@ -25,7 +25,7 @@ export default class ProductItem
     this.renderContent();
   }
 
-  public renderContent(): void {
+  protected renderContent(): void {
     const image = this.element.querySelector('.product__img img') as HTMLImageElement;
     const title = this.element.querySelector('.product__title') as HTMLHeadingElement;
     const release = this.element.querySelector('.product__release') as HTMLSpanElement;
@@ -35,6 +35,19 @@ export default class ProductItem
 
     const {
       brand, model, capacity, size, color, img, releaseDate, inStockCount, price,
+    }: {
+      id: string,
+      category: string,
+      brand: string,
+      releaseDate: string,
+      color: string,
+      model: string,
+      price: number,
+      capacity: string,
+      size?: string,
+      img: string
+      inStockCount: number,
+      popular: boolean,
     } = this.product;
 
     image.src = img;

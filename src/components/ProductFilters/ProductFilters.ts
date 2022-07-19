@@ -37,7 +37,7 @@ export default class ProductFilters extends Stateful<Filters> {
   private sortInput: HTMLSelectElement;
 
   constructor(productList: ProductsList) {
-    const filters = localStorage.getItem('productFilters');
+    const filters: string | null = localStorage.getItem('productFilters');
     super(filters ? JSON.parse(filters) : initialState);
     this.productsList = productList;
 
@@ -78,29 +78,29 @@ export default class ProductFilters extends Stateful<Filters> {
   }
 
   private attachRangeFilters(): void {
-    const quantityMin = this.quantities[0];
-    const quantityMax = this.quantities[this.quantities.length - 1];
-    const quantityDefault = [quantityMin, quantityMax];
-    const releaseDateStart = Date.parse(this.releaseDates[0]);
-    const releaseDateEnd = Date.parse(this.releaseDates[this.releaseDates.length - 1]);
-    const releaseDateDefault = [releaseDateStart, releaseDateEnd];
-    const quantityValues = [
-      document.getElementById('quantity-filter__value-min'),
-      document.getElementById('quantity-filter__value-max'),
+    const quantityMin: number = this.quantities[0];
+    const quantityMax: number = this.quantities[this.quantities.length - 1];
+    const quantityDefault: [number, number] = [quantityMin, quantityMax];
+    const releaseDateStart: number = Date.parse(this.releaseDates[0]);
+    const releaseDateEnd: number = Date.parse(this.releaseDates[this.releaseDates.length - 1]);
+    const releaseDateDefault: [number, number] = [releaseDateStart, releaseDateEnd];
+    const quantityValues: [HTMLSpanElement, HTMLSpanElement] = [
+      document.getElementById('quantity-filter__value-min') as HTMLSpanElement,
+      document.getElementById('quantity-filter__value-max') as HTMLSpanElement,
     ];
-    const releaseDateValues = [
-      document.getElementById('release-date-filter__value-start'),
-      document.getElementById('release-date-filter__value-end'),
+    const releaseDateValues: [HTMLSpanElement, HTMLSpanElement] = [
+      document.getElementById('release-date-filter__value-start') as HTMLSpanElement,
+      document.getElementById('release-date-filter__value-end') as HTMLSpanElement,
     ];
 
     noUiSlider.create(this.quantitySlider, {
-      start: [quantityMin, quantityMax],
+      start: quantityDefault,
       connect: true,
       range: { min: quantityMin, max: quantityMax },
     });
 
     noUiSlider.create(this.releaseDateSlider, {
-      start: [releaseDateStart, releaseDateEnd],
+      start: releaseDateDefault,
       connect: true,
       range: { min: releaseDateStart, max: releaseDateEnd },
     });
@@ -127,7 +127,7 @@ export default class ProductFilters extends Stateful<Filters> {
       const element = quantityValues[handle] as HTMLSpanElement;
       element.innerHTML = Math.floor(+values[handle]).toString();
 
-      const modifiedValues = [Math.floor(+values[0]), Math.floor(+values[1])];
+      const modifiedValues: [number, number] = [Math.floor(+values[0]), Math.floor(+values[1])];
       if (_.isEqual(quantityDefault, modifiedValues) && !connectElQuantity.classList.contains('noUi-connect--unused')) {
         connectElQuantity.classList.add('noUi-connect--unused');
       } else if (!_.isEqual(quantityDefault, modifiedValues) && connectElQuantity.classList.contains('noUi-connect--unused')) {
@@ -146,10 +146,10 @@ export default class ProductFilters extends Stateful<Filters> {
 
     this.releaseDateSlider.noUiSlider?.on('update', (values, handle) => {
       const element = releaseDateValues[handle] as HTMLSpanElement;
-      const date = new Date(parseInt(`${values[handle]}`, 10));
+      const date: Date = new Date(parseInt(`${values[handle]}`, 10));
       element.innerHTML = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 
-      const modifiedValues = [parseInt(`${values[0]}`, 10), parseInt(`${values[1]}`, 10)];
+      const modifiedValues: [number, number] = [parseInt(`${values[0]}`, 10), parseInt(`${values[1]}`, 10)];
       if (_.isEqual(releaseDateDefault, modifiedValues) && !connectElReleaseDate.classList.contains('noUi-connect--unused')) {
         connectElReleaseDate.classList.add('noUi-connect--unused');
       } else if (!_.isEqual(releaseDateDefault, modifiedValues) && connectElReleaseDate.classList.contains('noUi-connect--unused')) {
@@ -205,10 +205,10 @@ export default class ProductFilters extends Stateful<Filters> {
   }
 
   private attachCategoryFilters(): void {
-    const categoryList = new CategoryList(this.categories, this.state.category);
+    const categoryList: CategoryList = new CategoryList(this.categories, this.state.category);
     categoryList.elements.forEach((button) => button.addEventListener(
       'click',
-      (e: Event) => this.setCategoryFilter(e.target as HTMLLIElement),
+      (e: Event): void => this.setCategoryFilter(e.target as HTMLLIElement),
     ));
   }
 
@@ -249,8 +249,8 @@ export default class ProductFilters extends Stateful<Filters> {
   }
 
   private setReleaseDateFilter(min: number, max: number, values: [number, number]): void {
-    const formattedStartDate = new Date(parseInt(`${values[0]}`, 10)).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-    const formattedEndDate = new Date(parseInt(`${values[1]}`, 10)).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    const formattedStartDate: string = new Date(parseInt(`${values[0]}`, 10)).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    const formattedEndDate: string = new Date(parseInt(`${values[1]}`, 10)).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 
     if (values[0] > min || values[1] < max) {
       this.state.releaseDate = [formattedStartDate, formattedEndDate];
@@ -262,8 +262,8 @@ export default class ProductFilters extends Stateful<Filters> {
   }
 
   private setQuantityFilter(start: number, end: number, values: [number, number]): void {
-    const roundedMin = Math.floor(values[0]);
-    const roundedMax = Math.floor(values[1]);
+    const roundedMin: number = Math.floor(values[0]);
+    const roundedMax: number = Math.floor(values[1]);
 
     if (roundedMin > start || roundedMax < end) {
       this.state.quantity = [roundedMin, roundedMax];
@@ -284,7 +284,7 @@ export default class ProductFilters extends Stateful<Filters> {
   private setBrandFilter(e: Event): void {
     const checkbox = e.target as HTMLInputElement;
     const labelEl = checkbox.parentElement?.querySelector('.filter-checkbox__text-label') as HTMLSpanElement;
-    const label = labelEl.innerText.trim();
+    const label: string = labelEl.innerText.trim();
 
     if (checkbox.checked) {
       this.state.brand.push(label);
@@ -298,7 +298,7 @@ export default class ProductFilters extends Stateful<Filters> {
   private setColorFilter(e: Event): void {
     const checkbox = e.target as HTMLInputElement;
     const labelEl = checkbox.parentElement?.querySelector('.filter-checkbox__text-label') as HTMLSpanElement;
-    const label = labelEl.innerText.trim();
+    const label: string = labelEl.innerText.trim();
 
     if (checkbox.checked) {
       this.state.color.push(label);
@@ -312,7 +312,7 @@ export default class ProductFilters extends Stateful<Filters> {
   private setCapacityFilter(e: Event): void {
     const checkbox = e.target as HTMLInputElement;
     const labelEl = checkbox.parentElement?.querySelector('.filter-checkbox__text-label') as HTMLSpanElement;
-    const label = labelEl.innerText.trim().slice(0, -2);
+    const label: string = labelEl.innerText.trim().slice(0, -2);
 
     if (checkbox.checked) {
       this.state.capacity.push(label);
@@ -324,7 +324,7 @@ export default class ProductFilters extends Stateful<Filters> {
   }
 
   private setSortFilter(select: HTMLSelectElement): void {
-    const { value } = select;
+    const { value }: { value: string } = select;
 
     this.state = {
       ...this.state,
