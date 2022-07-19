@@ -9,15 +9,18 @@ export default class ProductItem
 
   private listeners: EventListener[];
 
+  private isInCart: boolean;
+
   constructor(
     hostElementSelector: string,
     product: Product,
-    private isInCart: boolean,
+    isInCart: boolean,
     listeners: EventListener[],
   ) {
     super('product-item', hostElementSelector, false, product.id);
     this.product = product;
     this.listeners = listeners;
+    this.isInCart = isInCart;
 
     this.renderContent();
   }
