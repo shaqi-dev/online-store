@@ -4,27 +4,29 @@
   position: relative;
 }
 
-.cart-icon {
-  height: 54.5px;
+.cart {
+  &-icon {
+    height: 54.5px;
 
-  @media (max-width: 1029px) {
-    align-self: center;
-    height: 44px;
+    @media (max-width: 1029px) {
+      align-self: center;
+      height: 44px;
+    }
   }
-}
 
-.cart-counter {
-  width: 26px;
-  position: absolute;
-  font-size: 2.2rem;
-  text-align: center;
-  top: 20px;
-  right: 14px;
-  color: #000000;
-  font-weight: bold;
-
-  @media (max-width: 1029px) {
-    top: 16px;
-    right: 9px;
+  &-counter {
+    width: 26px;
+    position: absolute;
+    font-size: 2.2rem;
+    text-align: center;
+    top: 20px;
+    right: 14px;
+    color: #000000;
+    font-weight: bold;
+  
+    @media (max-width: 1029px) {
+      top: 16px;
+      right: 9px;
+    }
   }
 }
