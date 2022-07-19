@@ -22,7 +22,7 @@ export default class ProductList
     this.products = products;
     this.productCart = cart;
     this.listeners = listeners;
-    const filters = localStorage.getItem('productFilters');
+    const filters: string | null = localStorage.getItem('productFilters');
 
     this.useFilters(filters ? JSON.parse(filters) : initialState);
   }
@@ -54,31 +54,34 @@ export default class ProductList
   }
 
   private useSearchFilter(filters: Filters): void {
-    const search = filters.search.toLowerCase();
+    const searchValue: string = filters.search.toLowerCase();
 
-    if (search !== '') {
-      const result = this.products.filter((product) => {
-        const brand = product.brand.toLowerCase();
-        const model = product.model.toLowerCase();
-        const color = product.color.toLowerCase();
-        const capacityORsize = product.size
+    if (searchValue !== '') {
+      const searchResult: Product[] = this.products.filter((product) => {
+        const brand: string = product.brand.toLowerCase();
+        const model: string = product.model.toLowerCase();
+        const color: string = product.color.toLowerCase();
+        const capacityOrSize: string = product.size
           ? product.size.toLowerCase()
           : product.capacity.toLowerCase();
 
-        const isExist = (prop: string): boolean => prop.indexOf(search) > -1;
+        const isExist = (property: string): boolean => property.indexOf(searchValue) > -1;
 
         return isExist(brand)
           || isExist(model)
           || isExist(color)
-          || isExist(capacityORsize);
+          || isExist(capacityOrSize);
       });
 
-      this.products = result;
+      this.products = searchResult;
     }
   }
 
   private useRangeFilter(filters: Filters): void {
-    const { quantity, releaseDate } = filters;
+    const { quantity, releaseDate }: {
+      quantity: [number, number] | []
+      releaseDate: [string, string] | []
+    } = filters;
 
     if (quantity.length === 2) {
       this.products = this.products.filter((product) => (
@@ -100,6 +103,11 @@ export default class ProductList
   private useCheckboxFilter(filters: Filters): void {
     const {
       brand, color, capacity, popular,
+    }: {
+      brand: string[],
+      color: string[],
+      capacity: string[],
+      popular: boolean
     } = filters;
 
     if (brand.length > 0 || color.length > 0 || capacity.length > 0) {
@@ -117,7 +125,7 @@ export default class ProductList
   }
 
   private useCategoryFilter(filters: Filters): void {
-    const { category } = filters;
+    const { category }: { category: string } = filters;
 
     if (category.toLowerCase() !== 'all') {
       this.products = products.filter((product) => product.category === category.toLowerCase());
@@ -127,11 +135,11 @@ export default class ProductList
   }
 
   private useSortFilter(filters: Filters): void {
-    const { sort } = filters;
+    const { sort }: { sort: SortFilters } = filters;
 
     const sortedByName = (): Product[] => this.products.sort((a, b) => {
-      const nameA = (`${a.brand}${a.model}${a.color}`).toLowerCase();
-      const nameB = (`${b.brand}${b.model}${b.color}`).toLowerCase();
+      const nameA: string = (`${a.brand}${a.model}${a.color}`).toLowerCase();
+      const nameB: string = (`${b.brand}${b.model}${b.color}`).toLowerCase();
       return nameA.localeCompare(nameB);
     });
 
