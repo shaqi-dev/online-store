@@ -31,6 +31,8 @@ export default class CheckboxFilter
     checkbox.id = this.checkboxId;
     textLabel.innerText = this.label;
 
-    if (this.checked) checkbox.checked = true;
+    if (this.checked) {
+      checkbox.checked = true;
+    }
   }
 }
