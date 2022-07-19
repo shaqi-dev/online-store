@@ -3,7 +3,7 @@ import Stateful from '../../models/stateful';
 import './ProductCart.scss';
 import 'toastify-js/src/toastify.css';
 
-const initialState: string[] = [];
+const INITIAL_STATE: string[] = [];
 
 export default class ProductCart<T extends HTMLElement> extends Stateful<string[]> {
   private cartElement: T;
@@ -22,7 +22,7 @@ export default class ProductCart<T extends HTMLElement> extends Stateful<string[
 
   constructor(cartSelector: string) {
     const savedState = localStorage.getItem('productCart');
-    super(savedState ? JSON.parse(savedState) : initialState);
+    super(savedState ? JSON.parse(savedState) : INITIAL_STATE);
 
     this.cartElement = document.querySelector(cartSelector) as T;
 

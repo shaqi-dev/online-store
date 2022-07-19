@@ -1,9 +1,9 @@
 import Component from '../Component';
 import ProductItem, { EventListener } from '../ProductItem';
-import { SortFilters, Filters, initialState } from '../../utils/filters';
+import { SortFilters, Filters, INITIAL_STATE } from '../../utils/filters';
 import ProductCart from '../ProductCart';
 import { Product } from '../../models/product';
-import products from '../../db/products';
+import PRODUCTS from '../../db/products';
 import './ProductList.scss';
 
 export default class ProductList
@@ -19,12 +19,12 @@ export default class ProductList
     listeners: EventListener[] = [],
   ) {
     super('product-list', '.main__body', false);
-    this.products = products;
+    this.products = PRODUCTS;
     this.productCart = cart;
     this.listeners = listeners;
     const filters: string | null = localStorage.getItem('productFilters');
 
-    this.useFilters(filters ? JSON.parse(filters) : initialState);
+    this.useFilters(filters ? JSON.parse(filters) : INITIAL_STATE);
   }
 
   protected renderContent(): void {
@@ -128,9 +128,9 @@ export default class ProductList
     const { category }: { category: string } = filters;
 
     if (category.toLowerCase() !== 'all') {
-      this.products = products.filter((product) => product.category === category.toLowerCase());
+      this.products = PRODUCTS.filter((product) => product.category === category.toLowerCase());
     } else {
-      this.products = products;
+      this.products = PRODUCTS;
     }
   }
 

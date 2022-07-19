@@ -18,7 +18,7 @@ export interface Filters {
   search: string;
 }
 
-export const initialState: Filters = {
+export const INITIAL_STATE: Filters = {
   category: 'all',
   sort: SortFilters.DEFAULT,
   brand: [],

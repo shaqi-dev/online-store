@@ -2,7 +2,7 @@ import * as noUiSlider from 'nouislider';
 import 'nouislider/dist/nouislider.css';
 import _ from 'lodash';
 import Stateful from '../../models/stateful';
-import { SortFilters, Filters, initialState } from '../../utils/filters';
+import { SortFilters, Filters, INITIAL_STATE } from '../../utils/filters';
 import {
   categories, brands, colors, capacities, releaseDates, quantities,
 } from '../../db/productsService';
@@ -38,7 +38,7 @@ export default class ProductFilters extends Stateful<Filters> {
 
   constructor(productList: ProductsList) {
     const filters: string | null = localStorage.getItem('productFilters');
-    super(filters ? JSON.parse(filters) : initialState);
+    super(filters ? JSON.parse(filters) : INITIAL_STATE);
     this.productsList = productList;
 
     this.quantitySlider = document.getElementById('quantity-filter__slider') as noUiSlider.target;
@@ -53,7 +53,7 @@ export default class ProductFilters extends Stateful<Filters> {
   }
 
   public resetSettings(): void {
-    this.state = JSON.parse(JSON.stringify(initialState));
+    this.state = JSON.parse(JSON.stringify(INITIAL_STATE));
 
     this.resetCheckboxFilters();
     this.resetRangeFilters();
@@ -214,7 +214,7 @@ export default class ProductFilters extends Stateful<Filters> {
 
   private resetFilters(): void {
     this.state = {
-      ...JSON.parse(JSON.stringify(initialState)),
+      ...JSON.parse(JSON.stringify(INITIAL_STATE)),
       category: this.state.category,
       sort: this.state.sort,
       search: this.state.search,
